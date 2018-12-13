@@ -1,0 +1,93 @@
+@charset "UTF-8";
+/* general styles */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* helper styles */
+.push {
+  height: 50px;
+}
+
+.clearer {
+  clear: both;
+}
+
+.vertical-center {
+  min-height: 100%;
+  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh;
+  /* These two lines are counted as one 🙂       */
+  display: flex;
+  align-items: center;
+}
+
+/* loader */
+#circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 150px;
+}
+
+.loader {
+  width: calc(100% - 0px);
+  height: calc(100% - 0px);
+  border: 8px solid #162534;
+  border-top: 8px solid #09f;
+  border-radius: 50%;
+  animation: rotate 5s linear infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* index - login */
+#index {
+  height: 100%;
+  background-color: #000;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+#index .wrapper {
+  display: block;
+  overflow-x: hidden;
+  min-height: 100%;
+  margin-bottom: -50px;
+}
+
+#index footer {
+  height: 50px;
+  color: #fff;
+}
+
+/* search page */
+#movie {
+  height: 100%;
+}
+
+#movie .wrapper {
+  display: block;
+  overflow-x: hidden;
+  min-height: 100%;
+  margin-bottom: -50px;
+}
+
+#movie footer {
+  height: 50px;
+  color: #fff;
+}
+
+#movie .movie-container img {
+  width: 100%;
+}
