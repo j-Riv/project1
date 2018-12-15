@@ -1,3 +1,6 @@
+// colors
+$danger-red: #E53549;
+
 /* general styles */
 
 html,
@@ -16,6 +19,10 @@ body {
 
 .clearer {
     clear: both;
+}
+
+.gtr-bg-black {
+    background-color: #000;
 }
 
 .vertical-center {
@@ -42,8 +49,8 @@ body {
 .loader {
     width: calc(100% - 0px);
     height: calc(100% - 0px);
-    border: 8px solid #162534;
-    border-top: 8px solid #09f;
+    border: 8px solid #222;
+    border-top: 8px solid #E53549;
     border-radius: 50%;
     animation: rotate 5s linear infinite;
 }
@@ -55,45 +62,58 @@ body {
 }
 
 
+/* all pages styles */
+
+#siteNav {
+    .navbar-brand {
+        img {
+            max-height: 40px;
+            width: auto;
+        }
+    }
+}
+
+footer {
+    height: 30px;
+    color: #fff;
+}
+
+
 /* index - login */
 
 #index {
     height: 100%;
     background-color: #000;
-    // background-image: url(../images/move-poster-collage.jpg);
+    background-image: url(../images/movie-poster-collage-75op.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    .wrapper {
-        display: block;
-        overflow-x: hidden;
-        min-height: 100%;
-        margin-bottom: -50px;
-    }
-    footer {
-        height: 50px;
-        color: #fff;
-    }
-}
-
-
-/* search page */
-
-#movie {
-    height: 100%;
-    .wrapper {
-        display: block;
-        overflow-x: hidden;
-        min-height: 100%;
-        margin-bottom: -50px;
-    }
-    footer {
-        height: 50px;
-        color: #fff;
-    }
-    .movie-container {
-        img {
-            width: 100%;
+    #loginCard {
+        background-color: #000;
+        .card-body {
+            .nav-tabs {
+                border-bottom: 1px solid #222;
+                .nav-item.nav-link {
+                    color: #222;
+                    &.active {
+                        border-top: 1px solid #222;
+                        border-left: 1px solid #222;
+                        border-right: 1px solid #222;
+                        border-bottom: 1px solid #000;
+                        background-color: transparent;
+                        color: #fff;
+                    }
+                }
+            }
+            .gtr-form-control {
+                background-color: #333;
+                color: #ccc;
+                border: none;
+                &:focus {
+                    border-color: #333;
+                    box-shadow: none;
+                }
+            }
         }
     }
 }
