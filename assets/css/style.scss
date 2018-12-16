@@ -37,6 +37,10 @@ body {
 
 /* loader */
 
+#loader {
+    z-index: 9999999;
+}
+
 #circle {
     position: absolute;
     top: 50%;
@@ -44,6 +48,7 @@ body {
     transform: translate(-50%, -50%);
     width: 150px;
     height: 150px;
+    z-index: 1000;
 }
 
 .loader {
@@ -65,6 +70,17 @@ body {
 /* all pages styles */
 
 #siteNav {
+    z-index: 100;
+    background-color: #000;
+    /* Black background color */
+    position: fixed;
+    /* Make it stick/fixed */
+    top: 0;
+    /* Stay on top */
+    width: 100%;
+    /* Full width */
+    transition: top 0.3s;
+    /* Transition effect when sliding down (and up) */
     .navbar-brand {
         img {
             max-height: 40px;
@@ -113,6 +129,83 @@ footer {
                     border-color: #333;
                     box-shadow: none;
                 }
+            }
+        }
+    }
+}
+
+
+/* search page */
+
+#movie {
+    .wrapper {
+        // stick nav
+        padding-top: 66px;
+        min-height: 100%;
+        /* Equal to height of footer */
+        /* But also accounting for potential margin-bottom of last child */
+        margin-bottom: -30px;
+    }
+    .push {
+        height: 30px;
+    }
+    #movieContent {
+        #accordionQuickSearch {
+            .card {
+                border: 1px solid #222;
+                border-bottom: none;
+                background-color: #222;
+                .card-header {
+                    background-color: #000;
+                    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+                    h5 {
+                        .btn-link {
+                            color: #222;
+                            text-transform: uppercase;
+                            text-decoration: none;
+                        }
+                    }
+                }
+                .card-body {
+                    background-color: #333;
+                    .btn-genre {
+                        margin: 5px;
+                    }
+                    #generalSearchForm {
+                        .input-group-prepend {
+                            label {
+                                background-color: #343a40;
+                                color: #fff;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        #movies {
+            min-height: 250px;
+        }
+    }
+    .movie-container {
+        box-sizing: border-box;
+        padding: 10px;
+        cursor: pointer;
+        img {
+            width: 100%;
+            transition: all 1s;
+            &:hover {
+                opacity: 0.5;
+            }
+        }
+    }
+    #movieModalCenter {
+        .modal-content {
+            padding: 20px;
+            img {
+                width: 100%;
+            }
+            .video-trailer {
+                color: #E53549;
             }
         }
     }

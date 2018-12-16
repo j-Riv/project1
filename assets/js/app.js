@@ -39,6 +39,7 @@ function loginInit() {
             console.log('user signed in');
             console.log(user);
             console.log('user uuid' + user.uid);
+            window.location.href = 'movie.html';
         } else {
             // No user is signed in.
             console.log('no user is signed in');
@@ -76,13 +77,18 @@ function searchInit() {
             console.log('user signed in');
             console.log(user);
             console.log('user uuid' + user.uid);
-            btn.append('<button type="button" id="signOut" class="btn btn-outline-light">Sign Out</button>');
+            var navBar = $('#navList');
+            var li = `
+                <li class="nav-item">
+                    <button type="button" id="signOut" class="btn btn-outline-light">Sign Out</button>
+                </li>
+            `;
+            navBar.append(li);
             // check db for user data if no data write user data
             checkDB(user);
         } else {
             // No user is signed in.
             console.log('no user is signed in');
-            btn.append('<a href="index.html" role="button" aria-pressed="true" class="btn btn-outline-light">Sign In</a>');
         }
     });
 }
@@ -198,7 +204,7 @@ function loginUser(email, password) {
     });
 }
 
-$('#signOut').on('click', function() {
+$(document).on('click', '#signOut', function() {
     signOut();
 });
 
@@ -209,7 +215,7 @@ $('#signOut').on('click', function() {
 function signOut() {
     firebase.auth().signOut().then(function() {
         // Sign-out successful.
-        var url = 'http://localhost/project/project1/index.html';
+        var url = 'index.html';
         $(location).attr('href', url);
     }).catch(function(error) {
         // An error happened.

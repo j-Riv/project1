@@ -30,6 +30,10 @@ body {
 }
 
 /* loader */
+#loader {
+  z-index: 9999999;
+}
+
 #circle {
   position: absolute;
   top: 50%;
@@ -37,6 +41,7 @@ body {
   transform: translate(-50%, -50%);
   width: 150px;
   height: 150px;
+  z-index: 1000;
 }
 
 .loader {
@@ -55,6 +60,20 @@ body {
 }
 
 /* all pages styles */
+#siteNav {
+  z-index: 100;
+  background-color: #000;
+  /* Black background color */
+  position: fixed;
+  /* Make it stick/fixed */
+  top: 0;
+  /* Stay on top */
+  width: 100%;
+  /* Full width */
+  transition: top 0.3s;
+  /* Transition effect when sliding down (and up) */
+}
+
 #siteNav .navbar-brand img {
   max-height: 40px;
   width: auto;
@@ -105,4 +124,78 @@ footer {
 #index #loginCard .card-body .gtr-form-control:focus {
   border-color: #333;
   box-shadow: none;
+}
+
+/* search page */
+#movie .wrapper {
+  padding-top: 66px;
+  min-height: 100%;
+  /* Equal to height of footer */
+  /* But also accounting for potential margin-bottom of last child */
+  margin-bottom: -30px;
+}
+
+#movie .push {
+  height: 30px;
+}
+
+#movie #movieContent #accordionQuickSearch .card {
+  border: 1px solid #222;
+  border-bottom: none;
+  background-color: #222;
+}
+
+#movie #movieContent #accordionQuickSearch .card .card-header {
+  background-color: #000;
+  border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+}
+
+#movie #movieContent #accordionQuickSearch .card .card-header h5 .btn-link {
+  color: #222;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+#movie #movieContent #accordionQuickSearch .card .card-body {
+  background-color: #333;
+}
+
+#movie #movieContent #accordionQuickSearch .card .card-body .btn-genre {
+  margin: 5px;
+}
+
+#movie #movieContent #accordionQuickSearch .card .card-body #generalSearchForm .input-group-prepend label {
+  background-color: #343a40;
+  color: #fff;
+}
+
+#movie #movieContent #movies {
+  min-height: 250px;
+}
+
+#movie .movie-container {
+  box-sizing: border-box;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#movie .movie-container img {
+  width: 100%;
+  transition: all 1s;
+}
+
+#movie .movie-container img:hover {
+  opacity: 0.5;
+}
+
+#movie #movieModalCenter .modal-content {
+  padding: 20px;
+}
+
+#movie #movieModalCenter .modal-content img {
+  width: 100%;
+}
+
+#movie #movieModalCenter .modal-content .video-trailer {
+  color: #E53549;
 }
