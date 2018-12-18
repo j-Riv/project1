@@ -279,7 +279,8 @@ a.article:hover {
 
 footer {
   height: 30px;
-  color: #fff;
+  color: #505050;
+  background-color: #000;
 }
 
 /* movie grid */
