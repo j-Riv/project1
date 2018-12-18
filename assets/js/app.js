@@ -179,18 +179,32 @@ function writeUserData(user) {
     });
 }
 
+var emailFeedback = $('.email-feedback');
+var passwordFeedback = $('.password-feedback');
 /**
  * creates new user with email & password
  * @param {string} email - new users email
  * @param {string} password - new users password
  */
 function createUser(email, password) {
-    console.log('user created');
+    console.log('creating user - look for errors below');
     firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
         // ...
+        console.error('Error Code: ' + error.code);
+        console.error('Error Message: ' + error.message);
+        // clear
+        emailFeedback.empty();
+        passwordFeedback.empty();
+        // display errors
+        if (error.code === 'auth/invalid-email') {
+            emailFeedback.html(`<p class="text-center text-danger">${error.message}</p>`);
+        }
+        if (error.code === 'auth/wrong-password') {
+            passwordFeedback.html(`<p class="text-center text-danger">${error.message}</p>`);
+        }
     });
 }
 
@@ -205,6 +219,16 @@ function loginUser(email, password) {
         var errorCode = error.code;
         var errorMessage = error.message;
         // ...
+        // clear
+        emailFeedback.empty();
+        passwordFeedback.empty();
+        // display errors
+        if (error.code === 'auth/invalid-email') {
+            emailFeedback.html(`<p class="text-center text-danger">${error.message}</p>`);
+        }
+        if (error.code === 'auth/wrong-password') {
+            passwordFeedback.html(`<p class="text-center text-danger">${error.message}</p>`);
+        }
     });
 }
 

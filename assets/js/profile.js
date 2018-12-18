@@ -77,10 +77,6 @@ function displayProfile(user) {
     console.log('imageURL: ' + user.imageUrl);
     console.log('favoriteGenre: ' + user.favoriteGenre);
     console.log('favoriteMovie: ' + user.favoriteMovie);
-    // lists
-    console.log('favorites: ' + user.favoritesList.movieID);
-
-
 
     var profileImg = user.imageUrl;
     if (profileImg === 'n/a') {
