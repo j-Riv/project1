@@ -199,7 +199,7 @@ a.article:hover {
 .loader {
   width: calc(100% - 0px);
   height: calc(100% - 0px);
-  border: 8px solid #222;
+  border: 8px solid #505050;
   border-top: 8px solid #E53549;
   border-radius: 50%;
   animation: rotate 5s linear infinite;
@@ -236,9 +236,9 @@ a.article:hover {
 }
 
 #siteNav #searchContent #accordionQuickSearch .card {
-  border: 1px solid #222;
+  border: 1px solid #505050;
   border-bottom: none;
-  background-color: #222;
+  background-color: #505050;
 }
 
 #siteNav #searchContent #accordionQuickSearch .card .card-header {
@@ -247,7 +247,7 @@ a.article:hover {
 }
 
 #siteNav #searchContent #accordionQuickSearch .card .card-header h5 .btn-link {
-  color: #222;
+  color: #505050;
   text-transform: uppercase;
   text-decoration: none;
 }
@@ -328,17 +328,17 @@ footer {
 }
 
 #index #loginCard .card-body .nav-tabs {
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid #505050;
 }
 
 #index #loginCard .card-body .nav-tabs .nav-item.nav-link {
-  color: #222;
+  color: #505050;
 }
 
 #index #loginCard .card-body .nav-tabs .nav-item.nav-link.active, #index #loginCard .card-body .nav-tabs .nav-item.nav-link.active:hover {
-  border-top: 1px solid #222;
-  border-left: 1px solid #222;
-  border-right: 1px solid #222;
+  border-top: 1px solid #505050;
+  border-left: 1px solid #505050;
+  border-right: 1px solid #505050;
   border-bottom: 1px solid #000;
   background-color: transparent;
   color: #fff;
@@ -373,9 +373,9 @@ footer {
 }
 
 #movie #movieContent #accordionQuickSearch .card {
-  border: 1px solid #222;
+  border: 1px solid #505050;
   border-bottom: none;
-  background-color: #222;
+  background-color: #505050;
 }
 
 #movie #movieContent #accordionQuickSearch .card .card-header {
@@ -384,7 +384,7 @@ footer {
 }
 
 #movie #movieContent #accordionQuickSearch .card .card-header h5 .btn-link {
-  color: #222;
+  color: #505050;
   text-transform: uppercase;
   text-decoration: none;
 }
@@ -478,17 +478,17 @@ footer {
 }
 
 #profile #profileContent #profileCard .card-body .nav-tabs {
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid #505050;
 }
 
 #profile #profileContent #profileCard .card-body .nav-tabs .nav-item.nav-link {
-  color: #222;
+  color: #505050;
 }
 
 #profile #profileContent #profileCard .card-body .nav-tabs .nav-item.nav-link.active, #profile #profileContent #profileCard .card-body .nav-tabs .nav-item.nav-link.active:hover {
-  border-top: 1px solid #222;
-  border-left: 1px solid #222;
-  border-right: 1px solid #222;
+  border-top: 1px solid #505050;
+  border-left: 1px solid #505050;
+  border-right: 1px solid #505050;
   border-bottom: 1px solid #000;
   background-color: transparent;
   color: #fff;

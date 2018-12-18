@@ -1,5 +1,6 @@
 // colors
 $danger-red: #E53549;
+$md-grey: #505050;
 
 /* general styles */
 
@@ -211,7 +212,7 @@ a.article:hover {
 .loader {
     width: calc(100% - 0px);
     height: calc(100% - 0px);
-    border: 8px solid #222;
+    border: 8px solid $md-grey;
     border-top: 8px solid #E53549;
     border-radius: 50%;
     animation: rotate 5s linear infinite;
@@ -250,15 +251,15 @@ a.article:hover {
     #searchContent {
         #accordionQuickSearch {
             .card {
-                border: 1px solid #222;
+                border: 1px solid $md-grey;
                 border-bottom: none;
-                background-color: #222;
+                background-color: $md-grey;
                 .card-header {
                     background-color: #000;
                     border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
                     h5 {
                         .btn-link {
-                            color: #222;
+                            color: $md-grey;
                             text-transform: uppercase;
                             text-decoration: none;
                         }
@@ -348,14 +349,14 @@ footer {
         background-color: #000;
         .card-body {
             .nav-tabs {
-                border-bottom: 1px solid #222;
+                border-bottom: 1px solid $md-grey;
                 .nav-item.nav-link {
-                    color: #222;
+                    color: $md-grey;
                     &.active,
                     &.active:hover {
-                        border-top: 1px solid #222;
-                        border-left: 1px solid #222;
-                        border-right: 1px solid #222;
+                        border-top: 1px solid $md-grey;
+                        border-left: 1px solid $md-grey;
+                        border-right: 1px solid $md-grey;
                         border-bottom: 1px solid #000;
                         background-color: transparent;
                         color: #fff;
@@ -396,15 +397,15 @@ footer {
     #movieContent {
         #accordionQuickSearch {
             .card {
-                border: 1px solid #222;
+                border: 1px solid $md-grey;
                 border-bottom: none;
-                background-color: #222;
+                background-color: $md-grey;
                 .card-header {
                     background-color: #000;
                     border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
                     h5 {
                         .btn-link {
-                            color: #222;
+                            color: $md-grey;
                             text-transform: uppercase;
                             text-decoration: none;
                         }
@@ -497,14 +498,14 @@ footer {
             background-color: #000;
             .card-body {
                 .nav-tabs {
-                    border-bottom: 1px solid #222;
+                    border-bottom: 1px solid $md-grey;
                     .nav-item.nav-link {
-                        color: #222;
+                        color: $md-grey;
                         &.active,
                         &.active:hover {
-                            border-top: 1px solid #222;
-                            border-left: 1px solid #222;
-                            border-right: 1px solid #222;
+                            border-top: 1px solid $md-grey;
+                            border-left: 1px solid $md-grey;
+                            border-right: 1px solid $md-grey;
                             border-bottom: 1px solid #000;
                             background-color: transparent;
                             color: #fff;
