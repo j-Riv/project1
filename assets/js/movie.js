@@ -204,14 +204,6 @@ function genreButtons() {
     });
 }
 
-$(document).on('click', '.btn-genre', function() {
-    // add loader
-    addLoader();
-    var genre_id = $(this).attr('data-id');
-    $('#movies').empty();
-    genreSearch(genre_id);
-});
-
 /**
  * gets movies based on the genre
  * @param {string} id - the genres id
@@ -224,7 +216,7 @@ function genreSearch(id) {
     }).then(function(response) {
         console.log(response);
         response.results.forEach(result => {
-            displayMovie(result);
+            displayMovie(result, $('#movies'));
         });
         // checks for loaded images
         $('#movies').waitForImages().done(function() {
@@ -234,17 +226,6 @@ function genreSearch(id) {
         });
     });
 }
-
-$('#generalSearchBtn').on('click', function() {
-    event.preventDefault();
-    $('#movies').empty();
-    // add loader
-    addLoader();
-    var q = $('#generalSearch').val().trim();
-    var o = $('#searchFor').val();
-    console.log('search for: ' + q + ' with ' + o);
-    generalSearch(q, o);
-});
 
 /**
  * general serch that gets movie data based on what your searching for (Ex: Tom Cruise, Jurassic Park) and what that is (Ex: Actor, Movie Title).
@@ -283,7 +264,7 @@ function getMovies(query) {
     }).then(function(response) {
         console.log(response);
         response.results.forEach(element => {
-            displayMovie(element);
+            displayMovie(element, $('#movies'));
         });
         // checks for loaded images
         $('#movies').waitForImages().done(function() {
@@ -297,9 +278,10 @@ function getMovies(query) {
 /**
  * creates a template for the movies data to be displayed in.
  * appends the movie to the grid of recommended movies
- * @param {object} movie - the movies object 
+ * @param {object} movie - the movies object
+ * @param {selector} container - the selector for the container to append to
  */
-function displayMovie(movie) {
+function displayMovie(movie, container) {
     var poster = configuration.images.base_url + configuration.images.poster_sizes[6] + movie.poster_path;
     var movieContainer = `
         <div class="col-sm-6 col-md-3 movie-container" data-id="${movie.id}">
@@ -310,7 +292,7 @@ function displayMovie(movie) {
             </div>
         </div>
     `;
-    $('#movies').append(movieContainer);
+    container.append(movieContainer);
 }
 
 // bind click function to document
@@ -346,9 +328,11 @@ function movieDetails(id) {
                     <div class="col-sm-6">
                         <img src="${poster}" />
                         <p>Avg Rating: ${response.vote_average}</p>
-                        <a class="video-trailer" data-fancybox href="https://www.youtube.com/watch?v=${youtube_key}">
-                            <i class="fa fa-play" aria-hidden="true"></i> Trailer
-                        </a>
+                        <a class="video- btn btn-danger" data-fancybox href="https://www.youtube.com/watch?v=${youtube_key}">
+                            <i class="fa fa-play" aria-hidden="true"></i></a>
+                        <button type="button" class="btn btn-danger user-movie-btn hidden" onclick="addToFavorites(${response.id})"><i class="fas fa-heart"></i></button>
+                        <button type="button" class="btn btn-danger user-movie-btn hidden" onclick="addToWatchLater(${response.id})"><i class="fas fa-bookmark"></i></button>
+                        <button type="button" class="btn btn-danger user-movie-btn hidden" onclick="addToHaveWatched(${response.id})"><i class="fas fa-address-card"></i></button>
                     </div>
                     <div class="col-sm-6">
                         <h3>${response.original_title}</h3>
@@ -364,159 +348,6 @@ function movieDetails(id) {
     });
 }
 
-// advanced search form
-$('#advancedSearchBtn').on('click', function() {
-    event.preventDefault();
-    // add loader
-    addLoader();
-    // clear
-    $('#movies').empty();
-    // get form values if they exist
-    if ($('#favoriteActor').val()) {
-        var favoriteActor = $('#favoriteActor').val().trim();
-    }
-    // get form values if they exist
-    if ($('#leastFavoriteActor').val()) {
-        var hatedActor = $('#leastFavoriteActor').val().trim();
-    }
-    // get favorite movie to get movie genres
-    if ($('#favoriteMovie').val()) {
-        var favoriteMovie = $('#favoriteMovie').val().trim();
-    }
-    // delete -- testing only
-    var favoriteActor = 'johnny depp';
-    var hatedActor = 'joaquin phoenix';
-    var favoriteMovie = 'john wick';
-    // checkboxes all get values will go here eventually
-
-    // the query
-    // var querySample = 'https://api.themoviedb.org/3/discover/movie?api_key=564b2e11aa606d7083773b2abc3fb126&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=28%2C878&with_people=6384';
-    var baseURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + api_key + '&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false';
-    var finalURL = baseURL;
-    // get ids for all parameters 1 by 1 with seperate queries for each
-    // keep appending the ids as params to final query
-    // filter final query to exclude the favorite movie (id)
-    if (favoriteActor) {
-        // get genre id
-        var getActorID = 'https://api.themoviedb.org/3/search/person?api_key=' + api_key + '&query=' + favoriteActor + '&sort_by=popularity.desc';
-        $.ajax({
-            url: getActorID,
-            method: "GET"
-        }).then(function(response) {
-            console.log('searching for actor and getting id');
-            console.log(response);
-            // if results?
-            if (response.results[0]) {
-                // get actor id
-                var actorID = response.results[0].id;
-                console.log('Got actor id:(' + actorID + ') for ' + favoriteActor);
-                // add actor id to query
-                finalURL = finalURL + '&with_people=' + encodeURI(actorID);
-            }
-            // no results
-            else {
-                console.error('Favorite actor/actress not found - no results for id');
-            }
-            // get hated actor id
-            if (hatedActor) {
-                // get actor id
-                var getHatedActorID = 'https://api.themoviedb.org/3/search/person?api_key=' + api_key + '&query=' + hatedActor + '&sort_by=popularity.desc';
-                $.ajax({
-                    url: getHatedActorID,
-                    method: "GET"
-                }).then(function(response) {
-                    console.log('searching for actor and getting id');
-                    console.log(response);
-                    // if results?
-                    if (response.results[0]) {
-                        // get actor id
-                        var actorID = response.results[0].id;
-                        console.log('Got hated actor id:(' + actorID + ') for ' + hatedActor);
-                        // add actor id to query
-                        finalURL = finalURL + '&without_people=' + encodeURI(actorID);
-                    }
-                    // no results
-                    else {
-                        console.error('Hated actor/actress not found - no results for id');
-                    }
-                    // get favorite movie's genres
-                    if (favoriteMovie) {
-                        // get genre ids
-                        var getGenreIDs = 'https://api.themoviedb.org/3/search/movie?api_key=' + api_key + '&query=' + favoriteMovie + '&sort_by=popularity.desc';
-                        $.ajax({
-                            url: getGenreIDs,
-                            method: "GET"
-                        }).then(function(response) {
-                            console.log('searching for favorite movie and getting ids');
-                            console.log(response);
-                            // if results?
-                            if (response.results[0]) {
-                                // get movie id - we will need it to filter
-                                var movieID = response.results[0].id;
-                                // get genre ids array
-                                var genreIDs = response.results[0].genre_ids;
-                                // save array to string
-                                genreIDs = genreIDs.toString();
-                                console.log('Got genre ids:(' + genreIDs + ') for ' + favoriteMovie);
-                                // add genre ids to query
-                                finalURL = finalURL + '&with_genres=' + encodeURI(genreIDs);
-                                console.log('Final Url: ' + finalURL);
-                                // get and display movie recommendations without displaying the users favorite movie
-                                getFilteredMovies(movieID, finalURL);
-
-                                // if we end up needing more recommendations
-                                if (parseInt(response.total_results) < 8) {
-                                    console.log('I think we need more movies. Lets get some.');
-                                    // this might end up showing duplicates though
-                                    // response.results.forEach(result => {
-                                    //     var resID = result.id;
-                                    //     var rec = 'https://api.themoviedb.org/3/movie/' + resID + '/recommendations?api_key=' + api_key + '&language=en-US&page=1';
-                                    //     getMovies(rec);
-                                    // });
-                                    // instead we might just search recommendations of 1st from response list
-                                    // first or random havent decided
-                                    var ep = [
-                                        'recommendations',
-                                        'similar'
-                                    ];
-                                    // random id from results
-                                    var randomID = response.results[Math.floor(Math.random() * response.results.length)].id;
-                                    // random endpoint
-                                    var randomEP = ep[Math.floor(Math.random() * ep.length)];
-                                    console.log('We will use random id:(' + randomID + ')');
-                                    // var recID = response.results[0].id;
-                                    var rec = 'https://api.themoviedb.org/3/movie/' + randomID + '/' + randomEP + '?api_key=' + api_key + '&language=en-US&page=1';
-                                    getMovies(rec);
-                                }
-                            }
-                            // no results
-                            else {
-                                console.error('Favorite movie not found - no results for genre ids');
-                            }
-                        });
-                    }
-                    // if no favorite movie
-                    else {
-                        // run the query without favorite movie
-                        console.log('no favorite movie selected');
-                        console.log('Final Url: ' + finalURL);
-                        // get and display movie recommendations based on favorite actor/actress
-                        // getMovies(finalURL);
-                    }
-                });
-            }
-            // if no hated actor
-            else {
-                console.error('no favorite actor selected');
-            }
-        });
-    }
-    // if no favorite actor
-    else {
-        console.error('no favorite actor selected');
-    }
-});
-
 /**
  * gets movies based on a query
  * it excludes the movie searched
@@ -524,16 +355,18 @@ $('#advancedSearchBtn').on('click', function() {
  * @param {string} query - the query
  */
 function getFilteredMovies(movieID, query) {
+    var totalResults;
     $.ajax({
         url: query,
         method: "GET"
     }).then(function(response) {
         console.log(response);
+        totalResults = response.total_results;
         response.results.forEach(movie => {
             // do not display their favorite movie
             if (movie.id !== movieID) {
                 console.log('current movie id: (' + movie.id + ') does not equal filtered id: (' + movieID + ')');
-                displayMovie(movie);
+                displayMovie(movie, $('#movies'));
             }
         });
         // checks for loaded images
@@ -543,6 +376,214 @@ function getFilteredMovies(movieID, query) {
             removeLoader();
         });
     });
+    return totalResults;
+}
+
+/**
+ * get search options from url if they exist
+ */
+function getURLParameters() {
+    console.log('getting url params');
+    // clear
+    $('#movies').empty();
+    // add loader
+    addLoader();
+    var pageURL = window.location.search.substring(1);
+    var urlParams = [];
+    // var pageURL = 'http://localhost/coding-bootcamp-projects/pick-a-flick/movies.html?fActor=keanu%20reeves&rTime=120&fMovie=john%20wick';
+    // var pageURL = 'http://localhost/coding-bootcamp-projects/pick-a-flick/movies.html?fActor=keanu%20reeves';
+    // var pageURL = 'http://localhost/coding-bootcamp-projects/pick-a-flick/movies.html?fMovie=john%20wick';
+    // var search = decodeURIComponent(window.location.href.slice(window.location.href.indexOf('?') + 1));
+    var search = pageURL.slice(pageURL.indexOf('?') + 1);
+    console.log('the search url: ' + search);
+    var urlVariables = search.split('&');
+    for (var i = 0; i < urlVariables.length; i++) {
+        var p = urlVariables[i].split('=');
+        var pObj = {
+            name: p[0],
+            searchFor: p[1]
+        };
+        urlParams.push(pObj);
+    }
+    // make array of objects to search for
+    var options = [];
+    var runtime = null;
+    Object.keys(urlParams).forEach(function(key) {
+        if (urlParams[key].name == 'fActor') {
+            var favoriteActorObj = {
+                name: 'favorite actor',
+                searchFor: urlParams[key].searchFor,
+                endPoint: 'search/person'
+            };
+            options.push(favoriteActorObj);
+        }
+        if (urlParams[key].name == 'rTime') {
+            runtime = urlParams[key].searchFor
+        }
+        if (urlParams[key].name == 'fMovie') {
+            var favoriteMovieObj = {
+                name: 'favorite movie',
+                searchFor: urlParams[key].searchFor,
+                endPoint: 'search/movie'
+            };
+            options.push(favoriteMovieObj);
+        }
+        if (urlParams[key].name == 'fGenre') {
+            var favoriteGenreObj = {
+                name: 'favorite genre',
+                searchFor: urlParams[key].searchFor,
+                endPoint: 'discover/movie'
+            };
+            options.push(favoriteGenreObj);
+        }
+    });
+    // calculate how many params and what to search
+    var numOfOptions = options.length;
+    if (numOfOptions > 1) {
+        console.log('running advanced search');
+        advancedSearch(options, runtime);
+    }
+    // quick search
+    else {
+        console.log('running quick search option');
+        quickSearch(options);
+    }
+}
+
+/**
+ * gets and displays results for quick (single) options
+ * @param {array} option - array of option objects
+ */
+function quickSearch(option) {
+    // search for movie titles
+    if (option[0].name === 'favorite movie') {
+        var queryURL = 'https://api.themoviedb.org/3/search/movie?api_key=' + api_key + '&query=' + option[0].searchFor + '&sort_by=popularity.desc';
+        getMovies(queryURL);
+    } else if (option[0].name === 'favorite genre') {
+        var queryURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + api_key + '&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=' + option[0].searchFor;
+        getMovies(queryURL);
+    }
+    // search for people - actors/actresses
+    else {
+        var queryURL = 'https://api.themoviedb.org/3/search/person?api_key=' + api_key + '&language=en-US&query=' + option[0].searchFor;
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function(response) {
+            console.log(response);
+            var person_id = response.results[0].id;
+            var newQueryUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=' + api_key + '&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_people=' + person_id;
+            getMovies(newQueryUrl);
+        });
+    }
+}
+
+/**
+ * gets movies based on multiple options
+ * @param {array} options - array of option objects 
+ * @param {string} runtime - movies runtime
+ */
+function advancedSearch(options, runtime) {
+    var baseURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + api_key + '&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false';
+    var finalURL = baseURL;
+    // get ids for parameters that need to be passed by id
+    var finalParams = [];
+    (function getOptionIDs() {
+        if (options.length) {
+            var option = options.shift();
+            var query = 'https://api.themoviedb.org/3/' + option.endPoint + '?api_key=' + api_key + '&query=' + option.searchFor + '&sort_by=popularity.desc';
+            $.ajax({
+                url: query,
+                method: "GET"
+            }).then(function(response) {
+                console.log(response);
+                // if results?
+                if (response.results[0]) {
+                    // get movie id - we will need it to filter
+                    var foundID = response.results[0].id;
+                    console.log('Got ID:(' + foundID + ')');
+                    // add id  
+                    if (option.name === 'favorite actor') {
+                        var param = {
+                            id: foundID,
+                            prop: '&with_people='
+                        }
+                    }
+                    if (option.name === 'runtime') {
+                        var param = {
+                            id: foundID,
+                            prop: '&with_runtime.lte='
+                        }
+                    }
+                    if (option.name === 'favorite movie') {
+                        // get genre ids array
+                        var genreIDs = response.results[0].genre_ids;
+                        // save array to string
+                        genreIDs = genreIDs.toString();
+                        var param = {
+                            id: foundID,
+                            genre_ids: genreIDs,
+                            prop: '&with_genres='
+                        }
+                    }
+                    finalParams.push(param);
+                    getOptionIDs();
+                }
+                // no results
+                else {
+                    console.error('no results found for ' + option.name + ', searching for ' + option.searchFor);
+                }
+            });
+        }
+        // once no more options left to get id's for
+        else {
+            // run the final query
+            console.log('final parameters:');
+            console.log(finalParams);
+            // build new url
+            var finalURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + api_key + '&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false';
+            var movieID = '';
+            Object.keys(finalParams).forEach(function(param) {
+                if (finalParams[param].genre_ids) {
+                    movieID = finalParams[param].id;
+                    finalURL = finalURL + finalParams[param].prop + encodeURI(finalParams[param].genre_ids);
+                } else if (runtime !== null) {
+                    finalURL = finalURL + '&with_runtime.lte=' + runtime;
+                } else {
+                    finalURL = finalURL + finalParams[param].prop + encodeURI(finalParams[param].id);
+                }
+            });
+            console.log('The final url: ' + finalURL);
+            // get and display movie recommendations without displaying the users favorite movie
+            console.log('running get filtered movies');
+            var totalResults = getFilteredMovies(movieID, finalURL);
+            console.log('done running get filtered movies');
+            // if we end up needing more recommendations
+            if (parseInt(totalResults) < 8) {
+                console.log('I think we need more movies. Lets get some.');
+                // this might end up showing duplicates though
+                // response.results.forEach(result => {
+                //     var resID = result.id;
+                //     var rec = 'https://api.themoviedb.org/3/movie/' + resID + '/recommendations?api_key=' + api_key + '&language=en-US&page=1';
+                //     getMovies(rec);
+                // });
+                // instead we might just search recommendations of 1st from response list
+                // first or random havent decided
+                var ep = [
+                    'recommendations',
+                    'similar'
+                ];
+                // random id from results
+                var randomID = response.results[Math.floor(Math.random() * response.results.length)].id;
+                // random endpoint
+                var randomEP = ep[Math.floor(Math.random() * ep.length)];
+                console.log('We will use random id:(' + randomID + ')');
+                // var recID = response.results[0].id;
+                var rec = 'https://api.themoviedb.org/3/movie/' + randomID + '/' + randomEP + '?api_key=' + api_key + '&language=en-US&page=1';
+                getMovies(rec);
+            }
+        }
+    })();
 }
 
 /**
@@ -571,6 +612,54 @@ function removeLoader() {
     $('#movies').show();
 }
 
+// genre button search
+$(document).on('click', '.btn-genre', function() {
+    var genre_id = $(this).attr('data-id');
+    // var redirectURL = 'http://localhost/coding-bootcamp-projects/pick-a-flick/movies.html?fGenre=' + genre_id;
+    var redirectURL = 'search.html?fGenre=' + genre_id;
+    window.location.href = redirectURL;
+
+});
+
+// quick search
+$('#generalSearchBtn').on('click', function() {
+    event.preventDefault();
+    var q = encodeURI($('#generalSearch').val().trim());
+    var o = $('#searchFor').val();
+    var redirectURL = 'search.html?' + o + '=' + q;
+    window.location.href = redirectURL;
+});
+
+// advanced search form
+$('#advancedSearchBtn').on('click', function() {
+    event.preventDefault();
+    var favoriteActor = $('#favoriteActor').val().trim();
+    var favoriteMovie = $('#favoriteMovie').val().trim();
+    var runtime = $('#runtime').val();
+
+    var arr = [];
+    if (favoriteActor) {
+        var fActor = 'fActor=' + encoideURI(favoriteActor);
+        arr.push(fActor);
+    }
+    if (favoriteMovie) {
+        var fMovie = 'fActor=' + encoideURI(favoriteMovie);
+        arr.push(fMovie);
+    }
+    if (runtime) {
+        var rTime = 'rTime=' + runtime;
+    }
+    var redirectURL = 'search.html?';
+    for (var i = 0; i < arr.length; i++) {
+        if (i === 0) {
+            redirectURL = redirectURL + arr[i];
+        } else {
+            redirectURL = redirectURL + '&' + arr[i];
+        }
+    }
+    window.location.href = redirectURL;
+});
+
 /**
  * sets up fancybox for dynamic movie trailers
  */
@@ -581,3 +670,9 @@ $().fancybox({
 // init functions
 // generalSearch();
 genreButtons();
+
+$(document).ready(function() {
+    if (window.location.href.indexOf('?') > -1) {
+        getURLParameters();
+    }
+});

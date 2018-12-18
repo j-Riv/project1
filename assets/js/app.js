@@ -24,6 +24,8 @@ var app = firebase.initializeApp(config);
 var auth = app.auth();
 var ui = new firebaseui.auth.AuthUI(auth);
 
+var userUID = '';
+
 /**
  * init for login page funcs
  * checks if user is logged in
@@ -39,7 +41,9 @@ function loginInit() {
             console.log('user signed in');
             console.log(user);
             console.log('user uuid' + user.uid);
-            window.location.href = 'movie.html';
+            // forward to search page default populate action (28)
+            window.location.href = 'search.html?fGenre=28';
+            userUID = user.uid;
         } else {
             // No user is signed in.
             console.log('no user is signed in');
@@ -77,12 +81,15 @@ function searchInit() {
             console.log('user signed in');
             console.log(user);
             console.log('user uuid' + user.uid);
+            userUID = user.uid;
             var navBar = $('#navList');
             var li = `
                 <li class="nav-item">
                     <button type="button" id="signOut" class="btn btn-outline-light">Sign Out</button>
                 </li>
             `;
+            $('body').addClass('user-logged-in');
+            // $('.user-movie-btn').removeClass('hidden');
             navBar.append(li);
             // check db for user data if no data write user data
             checkDB(user);
@@ -120,22 +127,6 @@ function userInfo(user) {
     }
 }
 
-/**
- * updates the users data
- * @param {string} user - the user uid 
- */
-function updateUserInfo(user) {
-    user.updateProfile({
-        displayName: "Jose A. Rivera",
-        photoURL: "https://example.com/jane-q-user/profile.jpg"
-    }).then(function() {
-        // Update successful.
-    }).catch(function(error) {
-        // An error happened.
-        console.error('update user info: ' + error);
-    });
-}
-
 // Get a reference to the database service
 var database = firebase.database();
 
@@ -170,7 +161,14 @@ function writeUserData(user) {
     // save the user's profile into Firebase so we can list users,
     // use them in Security and Firebase Rules, and show profiles
     database.ref('users/' + user.uid).set({
-        email: user.email
+        email: user.email,
+        name: 'n/a',
+        imageUrl: 'n/a',
+        favoriteGenre: 'n/a',
+        favoriteMovie: 'n/a',
+        favoritesList: [],
+        toWatchList: [],
+        watchedList: []
             //some more user data
     });
 }
@@ -219,5 +217,36 @@ function signOut() {
         $(location).attr('href', url);
     }).catch(function(error) {
         // An error happened.
+    });
+}
+
+/**
+ * adds movie to users favorite list
+ * @param {string} id - the movie id 
+ */
+function addToFavorites(id) {
+    console.log('userUID: ' + userUID);
+    database.ref('/users/' + userUID + '/favoritesList/').push({
+        movieID: id
+    });
+}
+
+/**
+ * adds movie to users watch later list
+ * @param {string} id - the movie id
+ */
+function addToWatchLater(id) {
+    database.ref('/users/' + userUID + '/toWatchList/').push({
+        movieID: id
+    });
+}
+
+/**
+ * adds movie to users has watched list
+ * @param {string} id - the movie id
+ */
+function addToHaveWatched(id) {
+    database.ref('/users/' + userUID + '/watchedList/').push({
+        movieID: id
     });
 }
