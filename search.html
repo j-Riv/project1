@@ -56,9 +56,53 @@
                 <i class="fas fa-arrow-left"></i>
             </div>
             <!-- Sidebar Head -->
+            <!-- T -->
             <div class="sidebar-header">
                 <h3>Search</h3>
             </div>
+            <!-- Search Title -->
+            <h5 class="sb-searchtitle">Search by keyword, movie, or person</h5>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2 sbsearchinput" type="search" placeholder="Enter keyword, movie, or person" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0 sbsearchbtn" type="submit">Search</button>
+            </form>
+            <!-- Quick Search Title -->
+            <form>
+                <h5 class="sb-quicktitle">Quick Search Options</h5>
+                <div class="input-group-prepend sboptions">
+                    <label class="input-group-text" for="inputGroupSelect01">Genres</label>
+                    <select class="custom-select" id="Genre">
+                        <option selected>Choose...</option>
+                    </select>
+                </div>
+
+                <div class="input-group-prepend sboptions">
+                    <label class="input-group-text" for="inputGroupSelect01">Rating</label>
+                    <select class="custom-select" id="Rating">
+                        <option selected>Choose...</option>
+                    </select>
+                </div>
+
+                <div class="input-group-prepend sboptions">
+                    <label class="input-group-text" for="inputGroupSelect01">Runtime</label>
+                    <select class="custom-select" id="inputGroupSelect04">
+                        <option selected>Choose...</option>
+                        <option value="1"> Below 60mins </option>
+                        <option value="2"> 60-90mins </option>
+                        <option value="3"> 90-120mins </option>
+                        <option value="4"> Above 120mins</option>
+                    </select>
+                </div>
+
+                <div class="input-group-prepend sboptions">
+                    <label class="input-group-text" for="inputGroupSelect01">Review Score</label>
+                    <select class="custom-select" id="inputGroupSelect05">
+                        <option selected>Choose...</option>
+                    </select>
+                </div>
+                <button class="btn btn-outline-success my-2 my-sm-0 sbquickbtn" type="submit">Quick Search</button>
+            </form>
+            <!-- /T -->
             <div id="searchContent" class="container">
                 <!-- accordian -->
                 <div class="row">
@@ -188,6 +232,71 @@
                     </div>
                     <!-- /accordian -->
                 </div>
+                <!-- /search content -->
+                <!-- m -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card mb-4 border-0 mycard">
+                                <div class="card-body mycard pt-4">
+                                    <!-- icons to show how many questions -->
+                                    <div id="carouselExampleIndicators" class="carousel slide carousel-fade text-dark" data-ride="carousel" data-interval="false">
+                                        <ol class="carousel-indicators my-auto">
+                                            <li data-target="#thecarousel" data-slide-to="0" class="active"></li>
+                                            <li data-target="#thecarousel" data-slide-to="1"></li>
+                                            <li data-target="#thecarousel" data-slide-to="2"></li>
+                                            <li data-target="#thecarousel" data-slide-to="3"></li>
+                                            <li data-target="#thecarousel" data-slide-to="4"></li>
+                                        </ol>
+                                        <!-- start questions -->
+                                        <div class="carousel-inner" style="height: 150px;">
+                                            <div class="carousel-item active" first-card="true">
+                                                <!-- question 1 -->
+                                                <p>What type of movie?</p>
+                                                <input class="form-control mt-3" type="text" placeholder="Genre" id="question">
+                                            </div>
+                                            <div class="carousel-item">
+                                                <!-- question 2 -->
+                                                <p>Who do you want to see?</p>
+                                                <input class="form-control mt-3" type="text" placeholder="Cast" id="question">
+                                            </div>
+                                            <div class="carousel-item">
+                                                <!-- question 3 -->
+                                                <p>How long do you want the movie?</p>
+                                                <input class="form-control mt-3" type="text" placeholder="Runtime" id="question">
+                                            </div>
+                                            <!-- question 4 -->
+                                            <div class="carousel-item">
+                                                <!-- contents of page 2 -->
+                                                <p>How recent do you want the movie</p>
+                                                <input class="form-control mt-3" type="text" placeholder="Release date" id="question">
+                                                <!-- add new questions before this div -->
+                                            </div>
+                                            <!-- submit button(add more question before this div) -->
+                                            <div class="carousel-item  text-center" last-card="true">
+                                                <button type="button" class="btn btn-dark">Show me the flick!</button>
+                                                <!--closing carousel div -->
+                                            </div>
+                                        </div>
+                                        <!-- buttons -->
+                                        <div class="col-sm-4 ml-3 mt-5 ">
+                                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                                <button class="btn" id="preBtn">Previous</button>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-4 float-right mr-1">
+                                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" first-card="true" data-slide="next">
+                                                <button class="btn" id="nexBtn">Next</button>
+                                                <!-- <button class="sr-only">Next</button> -->
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- m -->
         </nav>
 
         <!--Navbar  -->
