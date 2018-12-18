@@ -329,10 +329,11 @@ function movieDetails(id) {
                         <img src="${poster}" />
                         <p>Avg Rating: ${response.vote_average}</p>
                         <a class="video- btn btn-danger" data-fancybox href="https://www.youtube.com/watch?v=${youtube_key}">
-                            <i class="fa fa-play" aria-hidden="true"></i></a>
-                        <button type="button" class="btn btn-danger user-movie-btn hidden" onclick="addToFavorites(${response.id})"><i class="fas fa-heart"></i></button>
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                        </a>
                         <button type="button" class="btn btn-danger user-movie-btn hidden" onclick="addToWatchLater(${response.id})"><i class="fas fa-bookmark"></i></button>
                         <button type="button" class="btn btn-danger user-movie-btn hidden" onclick="addToHaveWatched(${response.id})"><i class="fas fa-address-card"></i></button>
+                        <button type="button" class="btn btn-danger user-movie-btn hidden" onclick="addToFavorites(${response.id})"><i class="fas fa-heart"></i></button>
                     </div>
                     <div class="col-sm-6">
                         <h3>${response.original_title}</h3>

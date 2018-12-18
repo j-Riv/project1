@@ -128,19 +128,25 @@ function displayProfile(user) {
 var api_key = '564b2e11aa606d7083773b2abc3fb126';
 
 function getMovies(user) {
-    if (user.favoritesList) {
+    var favoriteMovies = $('#favoritedMovies');
+    var moviesToWatch = $('#moviesToWatch');
+    var watchedMovies = $('#watchedMovies');
+    if (!$.isEmptyObject(user.favoritesList)) {
+        favoriteMovies.empty();
         Object.keys(user.favoritesList).forEach(function(key) {
-            getMovie(user.favoritesList[key].movieID, $('#favoritedMovies'));
+            getMovie(user.favoritesList[key].movieID, favoriteMovies);
         });
     }
-    if (user.toWatchList) {
+    if (!$.isEmptyObject(user.toWatchList)) {
+        moviesToWatch.empty();
         Object.keys(user.toWatchList).forEach(function(key) {
-            getMovie(user.toWatchList[key].movieID, $('#moviesToWatch'));
+            getMovie(user.toWatchList[key].movieID, moviesToWatch);
         });
     }
-    if (user.watchedList) {
+    if (!$.isEmptyObject(user.watchedList)) {
+        watchedMovies.empty();
         Object.keys(user.watchedList).forEach(function(key) {
-            getMovie(user.watchedList[key].movieID, $('#watchedMovies'));
+            getMovie(user.watchedList[key].movieID, watchedMovies);
         });
     }
 
