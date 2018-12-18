@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Template</title>
+    <title>The Template</title>
     <!-- firebase -->
     <!-- Firebase App is always required and must be first -->
     <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-app.js"></script>
@@ -25,44 +25,295 @@
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 </head>
 
-<body id="template">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="movie.html">Search</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <!-- Your Content Start Here -->
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-
+<body id="template" class="gtr-bg-black">
+    <!-- loader -->
+    <div id="loaderOverlay">
+        <div id="pageLoader">
+            <div class="loader">
+                <div class="loader">
+                    <div class="loader">
+                        <div class="loader">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <!-- Your Content Start Here -->
-    <footer class="text-center">
-        © Copyright 2018 Got The Runs
-    </footer>
-    <!-- Scripts -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- bootsrap -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.4/dist/jquery.fancybox.min.js"></script>
-    <!-- <script type="text/javascript" src="./assets/js/app.js"></script> -->
-    <!-- <script type="text/javascript" src="./assets/js/movie.js"></script> -->
+    <!-- /loader -->
+    <!-- modal -->
+    <div class="modal fade" id="movieModalCenter" tabindex="-1" role="dialog" aria-labelledby="movieModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" id="movieModelContent">
+                <!-- movie content should appear here -->
+            </div>
+        </div>
+    </div>
+    <!-- modal -->
+    <div class="wrapper">
+        <!-- Sidebar with Nav  -->
+        <nav id="sidebar">
+            <div id="dismiss">
+                <i class="fas fa-arrow-left"></i>
+            </div>
+            <!-- Sidebar Head -->
+            <div class="sidebar-header">
+                <h3>Search</h3>
+            </div>
+            <div id="searchContent" class="container">
+                <!-- accordian -->
+                <div class="row">
+                    <div class="col-sm-12 accordion text-center" id="accordionQuickSearch">
+                        <!-- genresearch -->
+                        <div class="card">
+                            <div class="card-header" id="genreSearch">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseGenreSearch" aria-expanded="true" aria-controls="collapseGenreSearch">
+                                        Genre
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseGenreSearch" class="collapse" aria-labelledby="genreSearch" data-parent="#accordionQuickSearch">
+                                <div id="genreButtons" class="card-body">
+                                    <!-- genre buttons will appear here -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- title/person search -->
+                        <div class="card">
+                            <div class="card-header" id="titleSearch">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTitleSearch" aria-expanded="true" aria-controls="collapseTitleSearch">
+                                        Titles | People
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseTitleSearch" class="collapse" aria-labelledby="titleSearch" data-parent="#accordionQuickSearch">
+                                <div class="card-body">
+                                    <!-- deleted class form-inline -->
+                                    <form id="generalSearchForm">
+                                        <div class="form-group mx-sm-3 mb-2">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text" for="searchFor">Search For</label>
+                                                </div>
+                                                <select class="custom-select" id="searchFor">
+                                                    <option selected>Choose...</option>
+                                                    <option value="fMovie">Movie Titles</option>
+                                                    <option value="fActor">Actor/Actress</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mx-sm-3 mb-2">
+                                            <label for="generalSearch" class="sr-only">Search for anything</label>
+                                            <input type="text" class="form-control" id="generalSearch" placeholder="Search...">
+                                        </div>
+                                        <button type="submit" id="generalSearchBtn" class="btn btn-dark mb-2"><i class="fa fa-search"
+                                                aria-hidden="true"></i> Search</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- advanced search -->
+                        <div class="card">
+                            <div class="card-header" id="advancedSearch">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseAdvancedSearch" aria-expanded="true" aria-controls="collapseAdvancedSearch">
+                                        Advanced Search
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseAdvancedSearch" class="collapse" aria-labelledby="advancedSearch" data-parent="#accordionQuickSearch">
+                                <div class="card-body">
+                                    <!-- advanced search form will go here -->
+                                    <form id="advancedSearchForm" class="needs-validation" novalidate>
+                                        <div id="formCarouselIndicators" class="carousel slide" data-ride="carousel">
+                                            <ol class="carousel-indicators">
+                                                <li data-target="#formCarouselIndicators" data-slide-to="0" class="active"></li>
+                                                <li data-target="#formCarouselIndicators" data-slide-to="1"></li>
+                                                <li data-target="#formCarouselIndicators" data-slide-to="2"></li>
+                                            </ol>
+                                            <div class="carousel-inner" style="height: 150px; max-width: 60%; margin: auto;">
+                                                <div class="carousel-item active">
+                                                    <div class="form-group">
+                                                        <label for="favoriteActor">Who's your favorite Actor/Actress?</label>
+                                                        <input type="text" class="form-control gtr-form-control" id="favoriteActor" placeholder="Who's your favorite Actor/Actress?">
+                                                        <div class="invalid-feedback">
+                                                            Please input an Actor/Actress name
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <div class="form-group mx-sm-3 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <label class="input-group-text" for="runtime">Runtime</label>
+                                                            </div>
+                                                            <select class="custom-select" id="runtime">
+                                                                <option selected>Choose...</option>
+                                                                <option value="60">> 1 hr</option>
+                                                                <option value="120">> 2 hrs</option>
+                                                                <option value="180">> 3 hrs</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <div class="form-group">
+                                                            <label for="favoriteMovie">What's your favorite movie?</label>
+                                                            <input type="text" class="form-control gtr-form-control" id="favoriteMovie" placeholder="What's your favorite movie?">
+                                                            <div class="invalid-feedback">
+                                                                Please input your favorite movie.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <a class="carousel-control-prev" href="#formCarouselIndicators" role="button" data-slide="prev">
+                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                                <a class="carousel-control-next" href="#formCarouselIndicators" role="button" data-slide="next">
+                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" id="advancedSearchBtn" class="btn btn-dark"><i
+                                                        class="fa fa-search" aria-hidden="true"></i> Search</button>
+                                            </div>
+                                    </form>
+                                    <!-- /form -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /accordian -->
+                </div>
+                <!-- search content -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card mb-4 border-0 mycard">
+                                <div class="card-body mycard pt-4">
+                                    <!-- icons to show how many questions -->
+                                    <div id="carouselExampleIndicators" class="carousel slide carousel-fade text-dark" data-ride="carousel" data-interval="false">
+                                        <ol class="carousel-indicators my-auto">
+                                            <li data-target="#thecarousel" data-slide-to="0" class="active"></li>
+                                            <li data-target="#thecarousel" data-slide-to="1"></li>
+                                            <li data-target="#thecarousel" data-slide-to="2"></li>
+                                            <li data-target="#thecarousel" data-slide-to="3"></li>
+                                            <li data-target="#thecarousel" data-slide-to="4"></li>
+                                        </ol>
+                                        <!-- start questions -->
+                                        <div class="carousel-inner" style="height: 150px;">
+                                            <div class="carousel-item active" first-card="true">
+                                                <!-- question 1 -->
+                                                <p>What type of movie?</p>
+                                                <input class="form-control mt-3" type="text" placeholder="Genre" id="question">
+                                            </div>
+                                            <div class="carousel-item">
+                                                <!-- question 2 -->
+                                                <p>Who do you want to see?</p>
+                                                <input class="form-control mt-3" type="text" placeholder="Cast" id="question">
+                                            </div>
+                                            <div class="carousel-item">
+                                                <!-- question 3 -->
+                                                <p>How long do you want the movie?</p>
+                                                <input class="form-control mt-3" type="text" placeholder="Runtime" id="question">
+                                            </div>
+                                            <!-- question 4 -->
+                                            <div class="carousel-item">
+                                                <!-- contents of page 2 -->
+                                                <p>How recent do you want the movie</p>
+                                                <input class="form-control mt-3" type="text" placeholder="Release date" id="question">
+                                                <!-- add new questions before this div -->
+                                            </div>
+                                            <!-- submit button(add more question before this div) -->
+                                            <div class="carousel-item  text-center" last-card="true">
+                                                <button type="button" class="btn btn-dark">Show me the flick!</button>
+                                                <!--closing carousel div -->
+                                            </div>
+                                        </div>
+                                        <!-- buttons -->
+                                        <div class="col-sm-4 ml-3 mt-5 ">
+                                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                                <button class="btn" id="preBtn">Previous</button>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-4 float-right mr-1">
+                                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" first-card="true" data-slide="next">
+                                                <button class="btn" id="nexBtn">Next</button>
+                                                <!-- <button class="sr-only">Next</button> -->
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </nav>
+        <!-- /sidebar -->
+
+        <!--Navbar  -->
+        <nav id="siteNav" class="navbar navbar-expand-lg navbar-dark gtr-bg-black">
+            <a class="navbar-brand" href="index.html">
+                <img src="./assets/images/pick-a-flick-logo.png" alt="Pick-A-Flick" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto" id="navList">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="altSearch" class="nav-link active">Search <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">Profile</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Your Content Start Here -->
+        <div class="container">
+            <div class="row">
+                <!-- images will appear here -->
+                <div class="col-sm-12">
+                    <p class="text-center text-light pt-5">Your content Goes here</p>
+                </div>
+            </div>
+        </div>
+        <!-- Your Content Ends Here -->
+        <div class="push">
+        </div>
+        </div>
+        <!-- wrapper -->
+        <footer class="text-center">
+            © Copyright 2018 Got The Runs
+        </footer>
+        <!-- Scripts -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+        <!-- bootsrap -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.4/dist/jquery.fancybox.min.js"></script>
+        <script type="text/javascript" src="./assets/js/navbar.js"></script>
+        <script type="text/javascript" src="./assets/js/app.js"></script>
+        <script type="text/javascript" src="./assets/js/jquery.waitforimages.min.js"></script>
+        <script type="text/javascript" src="./assets/js/movie.js"></script>
+        <script>
+            $(document).ready(function() {
+                searchInit();
+                setTimeout(function() {
+                    $('#loaderOverlay').remove();
+                }, 1000);
+            });
+        </script>
 </body>
 
 </html>

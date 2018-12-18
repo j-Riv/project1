@@ -383,7 +383,7 @@ function getFilteredMovies(movieID, query) {
 /**
  * get search options from url if they exist
  */
-function getURLParameters() {
+function getURLParameters(page) {
     console.log('getting url params');
     // clear
     $('#movies').empty();
@@ -391,6 +391,7 @@ function getURLParameters() {
     addLoader();
     var pageURL = window.location.search.substring(1);
     var urlParams = [];
+    // testing urls delete later
     // var pageURL = 'http://localhost/coding-bootcamp-projects/pick-a-flick/movies.html?fActor=keanu%20reeves&rTime=120&fMovie=john%20wick';
     // var pageURL = 'http://localhost/coding-bootcamp-projects/pick-a-flick/movies.html?fActor=keanu%20reeves';
     // var pageURL = 'http://localhost/coding-bootcamp-projects/pick-a-flick/movies.html?fMovie=john%20wick';
@@ -442,38 +443,47 @@ function getURLParameters() {
     var numOfOptions = options.length;
     if (numOfOptions > 1) {
         console.log('running advanced search');
-        advancedSearch(options, runtime);
+        advancedSearch(options, runtime, page);
     }
     // quick search
     else {
         console.log('running quick search option');
-        quickSearch(options);
+        quickSearch(options, page);
     }
+    // show more button
+    // var pageNumber = parseInt(page) + 1;
+    // var showMore = `
+    //     <div class="col-sm-12">
+    //         <button type="button" id="showMore" class="btn btn-outline-light" onClick="getURLParameters('${pageNumber}')">Show More</button>
+    //     </div>
+    // `;
+    // $('#next').append(showMore);
 }
 
 /**
  * gets and displays results for quick (single) options
  * @param {array} option - array of option objects
+ * @param {string} pg - page number
  */
-function quickSearch(option) {
+function quickSearch(option, pg) {
     // search for movie titles
     if (option[0].name === 'favorite movie') {
         var queryURL = 'https://api.themoviedb.org/3/search/movie?api_key=' + api_key + '&query=' + option[0].searchFor + '&sort_by=popularity.desc';
         getMovies(queryURL);
     } else if (option[0].name === 'favorite genre') {
-        var queryURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + api_key + '&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=' + option[0].searchFor;
+        var queryURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + api_key + '&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=' + pg + '&with_genres=' + option[0].searchFor;
         getMovies(queryURL);
     }
     // search for people - actors/actresses
     else {
-        var queryURL = 'https://api.themoviedb.org/3/search/person?api_key=' + api_key + '&language=en-US&query=' + option[0].searchFor;
+        var queryURL = 'https://api.themoviedb.org/3/search/person?api_key=' + api_key + '&language=en-US&page=' + pg + '&query=' + option[0].searchFor;
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function(response) {
             console.log(response);
             var person_id = response.results[0].id;
-            var newQueryUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=' + api_key + '&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_people=' + person_id;
+            var newQueryUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=' + api_key + '&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=' + pg + '&with_people=' + person_id;
             getMovies(newQueryUrl);
         });
     }
@@ -483,10 +493,10 @@ function quickSearch(option) {
  * gets movies based on multiple options
  * @param {array} options - array of option objects 
  * @param {string} runtime - movies runtime
+ * @param {string} pg - page number
  */
-function advancedSearch(options, runtime) {
-    var baseURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + api_key + '&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false';
-    var finalURL = baseURL;
+function advancedSearch(options, runtime, pg) {
+    var finalURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + api_key + '&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=' + pg;
     // get ids for parameters that need to be passed by id
     var finalParams = [];
     (function getOptionIDs() {
@@ -674,6 +684,6 @@ genreButtons();
 
 $(document).ready(function() {
     if (window.location.href.indexOf('?') > -1) {
-        getURLParameters();
+        getURLParameters('1');
     }
 });
