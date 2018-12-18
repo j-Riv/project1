@@ -40,6 +40,8 @@ function profileInit() {
         } else {
             // No user is signed in.
             console.log('no user is signed in');
+            // forward to search page default populate action (28)
+            window.location.href = 'search.html?fGenre=28';
         }
     });
 }
@@ -239,6 +241,24 @@ function updateMoviePoster(fm) {
         console.log(response);
         var poster = 'http://image.tmdb.org/t/p/original' + response.results[0].poster_path;
         $('#favMoviePoster').attr('src', poster);
+    });
+}
+
+$(document).on('click', '#signOut', function() {
+    signOut();
+});
+
+/**
+ * signs out current user from firebase only
+ * if user is signed in with google they will remain signed in to google
+ */
+function signOut() {
+    firebase.auth().signOut().then(function() {
+        // Sign-out successful.
+        var url = 'index.html';
+        $(location).attr('href', url);
+    }).catch(function(error) {
+        // An error happened.
     });
 }
 

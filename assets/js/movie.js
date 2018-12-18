@@ -282,17 +282,20 @@ function getMovies(query) {
  * @param {selector} container - the selector for the container to append to
  */
 function displayMovie(movie, container) {
-    var poster = configuration.images.base_url + configuration.images.poster_sizes[6] + movie.poster_path;
-    var movieContainer = `
-        <div class="col-sm-6 col-md-3 movie-container" data-id="${movie.id}">
-            <div class="row">
-                <div class="col-sm-12">
-                    <img class="movie-poster" src="${poster}" data-id="${movie.id}" data-toggle="modal" data-target="#movieModalCenter">
+    if (movie.poster_path !== null) {
+        var poster = configuration.images.base_url + configuration.images.poster_sizes[6] + movie.poster_path;
+
+        var movieContainer = `
+            <div class="col-sm-6 col-md-3 movie-container" data-id="${movie.id}">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <img class="movie-poster" src="${poster}" data-id="${movie.id}" data-toggle="modal" data-target="#movieModalCenter">
+                    </div>
                 </div>
             </div>
-        </div>
-    `;
-    container.append(movieContainer);
+        `;
+        container.append(movieContainer);
+    }
 }
 
 // bind click function to document
@@ -386,7 +389,7 @@ function getFilteredMovies(movieID, query) {
 function getURLParameters(page) {
     console.log('getting url params');
     // clear
-    $('#movies').empty();
+    // $('#movies').empty();
     // add loader
     addLoader();
     var pageURL = window.location.search.substring(1);
@@ -411,7 +414,12 @@ function getURLParameters(page) {
     var options = [];
     var runtime = null;
     Object.keys(urlParams).forEach(function(key) {
-        if (urlParams[key].name == 'fActor') {
+        // page
+        if (urlParams[key].name === 'page') {
+            page = urlParams[key].searchFor;
+        }
+        // favorite actor
+        if (urlParams[key].name === 'fActor') {
             var favoriteActorObj = {
                 name: 'favorite actor',
                 searchFor: urlParams[key].searchFor,
@@ -419,10 +427,11 @@ function getURLParameters(page) {
             };
             options.push(favoriteActorObj);
         }
-        if (urlParams[key].name == 'rTime') {
+        // runtime
+        if (urlParams[key].name === 'rTime') {
             runtime = urlParams[key].searchFor
         }
-        if (urlParams[key].name == 'fMovie') {
+        if (urlParams[key].name === 'fMovie') {
             var favoriteMovieObj = {
                 name: 'favorite movie',
                 searchFor: urlParams[key].searchFor,
@@ -430,7 +439,8 @@ function getURLParameters(page) {
             };
             options.push(favoriteMovieObj);
         }
-        if (urlParams[key].name == 'fGenre') {
+        // favorite genre
+        if (urlParams[key].name === 'fGenre') {
             var favoriteGenreObj = {
                 name: 'favorite genre',
                 searchFor: urlParams[key].searchFor,
@@ -451,13 +461,13 @@ function getURLParameters(page) {
         quickSearch(options, page);
     }
     // show more button
-    // var pageNumber = parseInt(page) + 1;
-    // var showMore = `
-    //     <div class="col-sm-12">
-    //         <button type="button" id="showMore" class="btn btn-outline-light" onClick="getURLParameters('${pageNumber}')">Show More</button>
-    //     </div>
-    // `;
-    // $('#next').append(showMore);
+    var pageNumber = parseInt(page) + 1;
+    var showMore = `
+        <div class="col-sm-12">
+            <button type="button" id="showMore" class="btn btn-outline-light" onClick="getURLParameters('${pageNumber}')"><i class="fas fa-plus"></i></button>
+        </div>
+    `;
+    $('#next').html(showMore);
 }
 
 /**
