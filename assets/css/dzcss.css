@@ -1,0 +1,114 @@
+body {
+    background-color: #323949;
+    font-family: 'Roboto', sans-serif;
+}
+
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+
+.settings-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #f9f9f9;
+    z-index: 3;
+}
+
+.settings-btn:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.jumbotron {
+    background-color: transparent;
+    position: relative;
+    display: flex;
+}
+
+#bannerImage {
+    background-image: url(../images/demoposter2.jpeg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    top: 0;
+    position: absolute;
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+}
+
+#shadowBox {
+    background-color: #000;
+    opacity: 0.5;
+    z-index: 2;
+    position: absolute;
+    margin-top: 25%;
+}
+
+#jumboText {
+    width: 80%;
+    z-index: 3;
+}
+
+#favMovie {
+    text-transform: capitalize;
+}
+
+#profilePic { 
+    width: 100%;
+    padding-top: 25%;
+    padding-bottom: 25%;
+    border-radius: 50%;
+    float: left;
+    height: 100%;
+    
+}
+
+#name {
+    margin-top: 10%;
+    margin-bottom: 7%;
+    font-weight: 300;
+}
+
+.favMoviePoster img{
+    width: 100%;
+    float: right;
+}
+
+#secretBar {
+    width: 100%;
+    height: 23px;
+    background-color: #000;
+    z-index: 1;
+}
+
+#btnPanel {
+    width: 80%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.tab-color {
+    background: #212129;
+}
+
+.nav-item {
+    background: #212129;
+}
+
+
+#movieDisplay {
+    width: 80%;
+    margin-bottom: 5%;
+}
+
+.movie-poster img {
+    width: 100%;
+    margin-bottom: 10%;
+    transition: all .2s ease-in-out;
+}
+
+.movie-poster img:hover {
+    transform: scale(1.1);
+}

@@ -237,6 +237,7 @@ function updateMoviePoster(fm) {
         console.log(response);
         var poster = 'http://image.tmdb.org/t/p/original' + response.results[0].poster_path;
         $('#favMoviePoster').attr('src', poster);
+        changeBg(poster);
     });
 }
 
@@ -256,6 +257,11 @@ function signOut() {
     }).catch(function(error) {
         // An error happened.
     });
+}
+
+function changeBg(poster) {
+    var banner = poster;
+    $("#bannerImage").css("background-image", "url(" + banner + ")");
 }
 
 // init
