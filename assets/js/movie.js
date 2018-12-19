@@ -269,7 +269,9 @@ function getMovies(query) {
         // checks for loaded images
         $('#movies').waitForImages().done(function() {
             // All descendant images have loaded, now slide up.
-            console.log('All images have loaded');
+            console.log('All images have loaded - GM');
+            // show more button
+            showMore(response.page, response.total_pages);
             removeLoader();
         });
     });
@@ -376,7 +378,9 @@ function getFilteredMovies(movieID, query) {
         // checks for loaded images
         $('#movies').waitForImages().done(function() {
             // All descendant images have loaded, now slide up.
-            console.log('All images have loaded');
+            console.log('All images have loaded - GFM');
+            // show more button
+            showMore(response.page, response.total_pages);
             removeLoader();
         });
     });
@@ -460,19 +464,6 @@ function getURLParameters(page) {
         console.log('running quick search option');
         quickSearch(options, page);
     }
-    // show more button
-    var currentURL = window.location.href;
-    var nextPageNum = parseInt(page) + 1;
-    var nextPageURL = currentURL.replace('page=' + String(page), 'page=' + String(nextPageNum));
-    if (nextPageURL === currentURL) {
-        nextPageURL = currentURL + '&page=' + nextPageNum;
-    }
-    var showMore = `
-        <div class="col-sm-12">
-            <a href="${nextPageURL}" id="showMore" class="btn btn-outline-light"><i class="fas fa-plus"></i></a>
-        </div>
-    `;
-    $('#next').html(showMore);
 }
 
 /**
@@ -686,6 +677,24 @@ $('#advancedSearchBtn').on('click', function() {
     }
     window.location.href = redirectURL;
 });
+
+function showMore(page, totalPages) {
+    if (totalPages > 1 && page < totalPages) {
+        // show more button
+        var currentURL = window.location.href;
+        var nextPageNum = parseInt(page) + 1;
+        var nextPageURL = currentURL.replace('page=' + String(page), 'page=' + String(nextPageNum));
+        if (nextPageURL === currentURL) {
+            nextPageURL = currentURL + '&page=' + nextPageNum;
+        }
+        var showMore = `
+        <div class="col-sm-12 pb-5">
+            <a href="${nextPageURL}" id="showMore" class="btn">Show More <i class="fas fa-plus"></i></a>
+        </div>
+    `;
+        $('#next').html(showMore);
+    }
+}
 
 /**
  * sets up fancybox for dynamic movie trailers

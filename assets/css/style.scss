@@ -227,6 +227,26 @@ a.article:hover {
 
 /* all pages styles */
 
+#sidebar {
+    div {
+        &:focus {
+            outline: none;
+        }
+    }
+    #advSearchContainer {
+        #carousel {
+            background-color: #292929;
+        }
+        .mycard {
+            background-color: #292929;
+            border-radius: 12px;
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
 #siteNav {
     z-index: 100;
     background-color: #000;
@@ -248,40 +268,40 @@ a.article:hover {
     a {
         cursor: pointer;
     }
-    #searchContent {
-        #accordionQuickSearch {
-            .card {
-                border: 1px solid $md-grey;
-                border-bottom: none;
-                background-color: $md-grey;
-                .card-header {
-                    background-color: #000;
-                    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
-                    h5 {
-                        .btn-link {
-                            color: $md-grey;
-                            text-transform: uppercase;
-                            text-decoration: none;
-                        }
-                    }
-                }
-                .card-body {
-                    background-color: #333;
-                    .btn-genre {
-                        margin: 5px;
-                    }
-                    #generalSearchForm {
-                        .input-group-prepend {
-                            label {
-                                background-color: #343a40;
-                                color: #fff;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+    // #searchContent {
+    //     #accordionQuickSearch {
+    //         .card {
+    //             border: 1px solid $md-grey;
+    //             border-bottom: none;
+    //             background-color: $md-grey;
+    //             .card-header {
+    //                 background-color: #000;
+    //                 border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+    //                 h5 {
+    //                     .btn-link {
+    //                         color: $md-grey;
+    //                         text-transform: uppercase;
+    //                         text-decoration: none;
+    //                     }
+    //                 }
+    //             }
+    //             .card-body {
+    //                 background-color: #333;
+    //                 .btn-genre {
+    //                     margin: 5px;
+    //                 }
+    //                 #generalSearchForm {
+    //                     .input-group-prepend {
+    //                         label {
+    //                             background-color: #343a40;
+    //                             color: #fff;
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 }
 
 .wrapper {
@@ -383,7 +403,7 @@ footer {
 
 /* search page */
 
-#movie {
+#search {
     .wrapper {
         // stick nav
         padding-top: 66px;
@@ -453,6 +473,15 @@ footer {
             .video-trailer {
                 color: #E53549;
             }
+        }
+    }
+    #showMore {
+        border: 1px solid $md-grey;
+        color: $md-grey;
+        transition: 500ms all;
+        &:hover {
+            background-color: $md-grey;
+            color: #fff;
         }
     }
 }
@@ -564,16 +593,5 @@ footer {
                 box-shadow: none;
             }
         }
-    }
-}
-
-// miguel
-#advSearchContainer {
-    #carousel{
-      background-color: #292929;
-    }
-    .mycard{
-      background-color:#292929;
-      border-radius: 12px;
     }
 }
