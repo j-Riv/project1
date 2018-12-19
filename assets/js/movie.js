@@ -665,11 +665,11 @@ $('#advancedSearchBtn').on('click', function() {
 
     var arr = [];
     if (favoriteActor) {
-        var fActor = 'fActor=' + encoideURI(favoriteActor);
+        var fActor = 'fActor=' + encodeURI(favoriteActor);
         arr.push(fActor);
     }
     if (favoriteMovie) {
-        var fMovie = 'fMovie=' + encoideURI(favoriteMovie);
+        var fMovie = 'fMovie=' + encodeURI(favoriteMovie);
         arr.push(fMovie);
     }
     if (runtime) {
