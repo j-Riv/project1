@@ -21,5 +21,3 @@ User will be able to create an account by using 'Sign in with Google' or email a
 ## Thanks
 * [Alexander Dickson](http://alexanderdickson.com/) for [waitForImages](https://github.com/alexanderdickson/waitForImages)
 * [fancyapps](https://fancyapps.com/fancybox/3/) for [fancybox](https://fancyapps.com/fancybox/3/docs/)
-* George Lucas for creating [Star Wars](https://www.starwars.com/)
-* Keanu Reeves for inspiring us all to be better people.
