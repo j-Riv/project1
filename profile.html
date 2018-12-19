@@ -17,18 +17,15 @@
     <script src="https://www.gstatic.com/firebasejs/ui/0.4.0/firebase-ui-auth.js"></script>
     <link rel="stylesheet" type="text/css" href="https://www.gstatic.com/firebasejs/ui/0.4.0/firebase-ui-auth.css">
     <!-- CSS -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/dzcss.css">
     <!-- bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.4/dist/jquery.fancybox.min.css" />
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
     <!--Icon-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 </head>
 
 <body id="profile" class="gtr-bg-black">
@@ -47,11 +44,17 @@
     </div>
     <!-- /loader -->
     <!-- movie modal -->
-    <div class="modal fade" id="movieModalCenter" tabindex="-1" role="dialog" aria-labelledby="movieModalCenterTitle"
-        aria-hidden="true">
+    <div class="modal fade" id="movieModalCenter" tabindex="-1" role="dialog" aria-labelledby="movieModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content" id="movieModelContent">
-                <!-- movie content should appear here -->
+            <div class="modal-content">
+                <div class="modal-head">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="movieModelContent">
+                    <!-- movie content should appear here -->
+                </div>
             </div>
         </div>
     </div>
@@ -115,8 +118,7 @@
                         <div class="card">
                             <div class="card-header" id="genreSearch">
                                 <h5 class="mb-0">
-                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseGenreSearch"
-                                        aria-expanded="true" aria-controls="collapseGenreSearch">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseGenreSearch" aria-expanded="true" aria-controls="collapseGenreSearch">
                                         Genre
                                     </button>
                                 </h5>
@@ -131,8 +133,7 @@
                         <div class="card">
                             <div class="card-header" id="titleSearch">
                                 <h5 class="mb-0">
-                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTitleSearch"
-                                        aria-expanded="true" aria-controls="collapseTitleSearch">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTitleSearch" aria-expanded="true" aria-controls="collapseTitleSearch">
                                         Titles | People
                                     </button>
                                 </h5>
@@ -167,14 +168,12 @@
                         <div class="card">
                             <div class="card-header" id="advancedSearch">
                                 <h5 class="mb-0">
-                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseAdvancedSearch"
-                                        aria-expanded="true" aria-controls="collapseAdvancedSearch">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseAdvancedSearch" aria-expanded="true" aria-controls="collapseAdvancedSearch">
                                         Advanced Search
                                     </button>
                                 </h5>
                             </div>
-                            <div id="collapseAdvancedSearch" class="collapse" aria-labelledby="advancedSearch"
-                                data-parent="#accordionQuickSearch">
+                            <div id="collapseAdvancedSearch" class="collapse" aria-labelledby="advancedSearch" data-parent="#accordionQuickSearch">
                                 <div class="card-body">
                                     <!-- advanced search form will go here -->
                                     <form id="advancedSearchForm" class="needs-validation" novalidate>
@@ -188,8 +187,7 @@
                                                 <div class="carousel-item active">
                                                     <div class="form-group">
                                                         <label for="favoriteActor">Who's your favorite Actor/Actress?</label>
-                                                        <input type="text" class="form-control gtr-form-control" id="favoriteActor"
-                                                            placeholder="Who's your favorite Actor/Actress?">
+                                                        <input type="text" class="form-control gtr-form-control" id="favoriteActor" placeholder="Who's your favorite Actor/Actress?">
                                                         <div class="invalid-feedback">
                                                             Please input an Actor/Actress name
                                                         </div>
@@ -212,21 +210,18 @@
                                                     <div class="carousel-item">
                                                         <div class="form-group">
                                                             <label for="favoriteMovie">What's your favorite movie?</label>
-                                                            <input type="text" class="form-control gtr-form-control" id="favoriteMovie"
-                                                                placeholder="What's your favorite movie?">
+                                                            <input type="text" class="form-control gtr-form-control" id="favoriteMovie" placeholder="What's your favorite movie?">
                                                             <div class="invalid-feedback">
                                                                 Please input your favorite movie.
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <a class="carousel-control-prev" href="#formCarouselIndicators" role="button"
-                                                    data-slide="prev">
+                                                <a class="carousel-control-prev" href="#formCarouselIndicators" role="button" data-slide="prev">
                                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                     <span class="sr-only">Previous</span>
                                                 </a>
-                                                <a class="carousel-control-next" href="#formCarouselIndicators" role="button"
-                                                    data-slide="next">
+                                                <a class="carousel-control-next" href="#formCarouselIndicators" role="button" data-slide="next">
                                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                     <span class="sr-only">Next</span>
                                                 </a>
@@ -237,13 +232,13 @@
                                             </div>
                                     </form>
                                     <!-- /form -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- /accordian -->
                 </div>
-                <!-- /accordian -->
-            </div>
         </nav>
 
         <!--Navbar  -->
@@ -251,8 +246,7 @@
             <a class="navbar-brand" href="index.html">
                 <img src="./assets/images/pick-a-flick-logo.png" alt="Pick-A-Flick" />
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-                aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -264,8 +258,7 @@
                         <a id="altSearch" class="nav-link">Search</a>
                     </li>
                     <div class="dropdown">
-                        <a class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                            aria-haspopup="true" aria-expanded="false">Profile <span class="sr-only">(current)</span></a>
+                        <a class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Profile <span class="sr-only">(current)</span></a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
                             <button class="dropdown-item" type="button">View Profile</button>
                             <button class="dropdown-item" type="button">Edit Profile</button>
@@ -316,18 +309,14 @@
                         <div class="card-body">
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <a class="nav-item nav-link active" id="movies-to-watch-tab" data-toggle="tab" href="#moviesToWatchContainer"
-                                        role="tab" aria-controls="moviesToWatchContainer" aria-selected="true">Movies
+                                    <a class="nav-item nav-link active" id="movies-to-watch-tab" data-toggle="tab" href="#moviesToWatchContainer" role="tab" aria-controls="moviesToWatchContainer" aria-selected="true">Movies
                                         to Watch</a>
-                                    <a class="nav-item nav-link" id="watched-tab" data-toggle="tab" href="#watchedContainer"
-                                        role="tab" aria-controls="watchedContainer" aria-selected="true">Watched</a>
-                                    <a class="nav-item nav-link" id="favorites-tab" data-toggle="tab" href="#favoritesContainer"
-                                        role="tab" aria-controls="favoritesContainer" aria-selected="false">Favorites</a>
+                                    <a class="nav-item nav-link" id="watched-tab" data-toggle="tab" href="#watchedContainer" role="tab" aria-controls="watchedContainer" aria-selected="true">Watched</a>
+                                    <a class="nav-item nav-link" id="favorites-tab" data-toggle="tab" href="#favoritesContainer" role="tab" aria-controls="favoritesContainer" aria-selected="false">Favorites</a>
                                 </div>
                             </nav>
                             <div class="tab-content" id="nav-tabContent">
-                                <div class="tab-pane fade show active" id="moviesToWatchContainer" role="tabpanel"
-                                    aria-labelledby="movies-to-watch-tab">
+                                <div class="tab-pane fade show active" id="moviesToWatchContainer" role="tabpanel" aria-labelledby="movies-to-watch-tab">
                                     <!-- movies to watch -->
                                     <div class="container">
                                         <div id="moviesToWatch" class="row">
@@ -371,34 +360,32 @@
 
         <!-- Your Content Start Here -->
         <div class="push"></div>
-    </div>
-    <!-- /wrapper -->
-    <footer class="text-center fixed-bottom">
-        © Copyright 2018 Got The Runs
-    </footer>
-    <!-- Scripts -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-    <!-- bootsrap -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.4/dist/jquery.fancybox.min.js"></script>
-    <script type="text/javascript" src="./assets/js/jquery.waitforimages.min.js"></script>
-    <!-- js -->
-    <script type="text/javascript" src="./assets/js/navbar.js"></script>
-    <!-- <script type="text/javascript" src="./assets/js/app.js"></script> -->
-    <script type="text/javascript" src="./assets/js/movie.js"></script>
-    <script type="text/javascript" src="./assets/js/profile.js"></script>
-    <script>
-        $(document).ready(function () {
-            setTimeout(function () {
-                $('#loaderOverlay').remove();
-            }, 1000);
-        });
-    </script>
+        </div>
+        <!-- /wrapper -->
+        <footer class="text-center fixed-bottom">
+            © Copyright 2018 Got The Runs
+        </footer>
+        <!-- Scripts -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+        <!-- bootsrap -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.4/dist/jquery.fancybox.min.js"></script>
+        <script type="text/javascript" src="./assets/js/jquery.waitforimages.min.js"></script>
+        <!-- js -->
+        <script type="text/javascript" src="./assets/js/navbar.js"></script>
+        <!-- <script type="text/javascript" src="./assets/js/app.js"></script> -->
+        <script type="text/javascript" src="./assets/js/movie.js"></script>
+        <script type="text/javascript" src="./assets/js/profile.js"></script>
+        <script>
+            $(document).ready(function() {
+                setTimeout(function() {
+                    $('#loaderOverlay').remove();
+                }, 1000);
+            });
+        </script>
 </body>
 
 </html>
