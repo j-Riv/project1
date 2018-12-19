@@ -209,6 +209,7 @@
     <script type="text/javascript" src="./assets/js/jquery.waitforimages.min.js"></script>
     <script type="text/javascript" src="./assets/js/movie.js"></script>
     <script>
+        searchInit();
         $('#movies').waitForImages().done(function() {
             // All descendant images have loaded, now slide up.
             console.log('All images have loaded');

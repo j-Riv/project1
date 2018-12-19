@@ -285,7 +285,7 @@ function getMovies(query) {
  */
 function displayMovie(movie, container) {
     if (movie.poster_path !== null) {
-        var poster = configuration.images.base_url + configuration.images.poster_sizes[6] + movie.poster_path;
+        var poster = configuration.images.secure_base_url + configuration.images.poster_sizes[6] + movie.poster_path;
 
         var movieContainer = `
             <div class="col-sm-6 col-md-3 movie-container" data-id="${movie.id}">
@@ -323,7 +323,7 @@ function movieDetails(id) {
         method: "GET"
     }).then(function(response) {
         console.log(response);
-        var poster = configuration.images.base_url + configuration.images.poster_sizes[6] + response.poster_path;
+        var poster = configuration.images.secure_base_url + configuration.images.poster_sizes[6] + response.poster_path;
         var youtube_key = response.videos.results[0].key;
         console.log('youtube: ' + youtube_key);
         // make a template for modal click on movie info
