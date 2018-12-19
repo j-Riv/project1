@@ -2,7 +2,7 @@
 
 A movie search web app created to showcase use of Firebase and TMDb Api's.
 
-**Link** [Project1](https://j-riv.github.io/project1)
+**Link** [Pick-A-Flick](https://j-riv.github.io/project1)
 
 ## Tecnologies Used:
 * Javascript
@@ -17,3 +17,9 @@ A movie search web app created to showcase use of Firebase and TMDb Api's.
 
 ## Description
 User will be able to create an account by using 'Sign in with Google' or email and password. Users will be able to search for movies by genre, actors/actresses, movie titles etc. Users will also be able to do a more advanced search by using the advanced search form. If the user chooses to create an account he/she will be able to save movies to 3 different lists (watch later, have watched and favorites).
+
+## Thanks
+* [Alexander Dickson](http://alexanderdickson.com/) for [waitForImages](https://github.com/alexanderdickson/waitForImages)
+* [fancyapps](https://fancyapps.com/fancybox/3/) for [fancybox](https://fancyapps.com/fancybox/3/docs/)
+* George Lucas for creating [Star Wars](https://www.starwars.com/)
+* Keanu Reeves for inspiring us all to be better people.
