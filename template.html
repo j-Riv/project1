@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pick-A-Flick | Sign In or Sign Up</title>
+    <title>The Template</title>
     <!-- firebase -->
     <!-- Firebase App is always required and must be first -->
     <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-app.js"></script>
@@ -25,7 +25,21 @@
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 </head>
 
-<body id="index" class="gtr-bg-black">
+<body id="template" class="gtr-bg-black">
+    <!-- loader -->
+    <div id="loaderOverlay">
+        <div id="pageLoader">
+            <div class="loader">
+                <div class="loader">
+                    <div class="loader">
+                        <div class="loader">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /loader -->
     <!-- modal -->
     <div class="modal fade" id="movieModalCenter" tabindex="-1" role="dialog" aria-labelledby="movieModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -174,7 +188,71 @@
                     </div>
                     <!-- /accordian -->
                 </div>
+                <!-- search content -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card mb-4 border-0 mycard">
+                                <div class="card-body mycard pt-4">
+                                    <!-- icons to show how many questions -->
+                                    <div id="carouselExampleIndicators" class="carousel slide carousel-fade text-dark" data-ride="carousel" data-interval="false">
+                                        <ol class="carousel-indicators my-auto">
+                                            <li data-target="#thecarousel" data-slide-to="0" class="active"></li>
+                                            <li data-target="#thecarousel" data-slide-to="1"></li>
+                                            <li data-target="#thecarousel" data-slide-to="2"></li>
+                                            <li data-target="#thecarousel" data-slide-to="3"></li>
+                                            <li data-target="#thecarousel" data-slide-to="4"></li>
+                                        </ol>
+                                        <!-- start questions -->
+                                        <div class="carousel-inner" style="height: 150px;">
+                                            <div class="carousel-item active" first-card="true">
+                                                <!-- question 1 -->
+                                                <p>What type of movie?</p>
+                                                <input class="form-control mt-3" type="text" placeholder="Genre" id="question">
+                                            </div>
+                                            <div class="carousel-item">
+                                                <!-- question 2 -->
+                                                <p>Who do you want to see?</p>
+                                                <input class="form-control mt-3" type="text" placeholder="Cast" id="question">
+                                            </div>
+                                            <div class="carousel-item">
+                                                <!-- question 3 -->
+                                                <p>How long do you want the movie?</p>
+                                                <input class="form-control mt-3" type="text" placeholder="Runtime" id="question">
+                                            </div>
+                                            <!-- question 4 -->
+                                            <div class="carousel-item">
+                                                <!-- contents of page 2 -->
+                                                <p>How recent do you want the movie</p>
+                                                <input class="form-control mt-3" type="text" placeholder="Release date" id="question">
+                                                <!-- add new questions before this div -->
+                                            </div>
+                                            <!-- submit button(add more question before this div) -->
+                                            <div class="carousel-item  text-center" last-card="true">
+                                                <button type="button" class="btn btn-dark">Show me the flick!</button>
+                                                <!--closing carousel div -->
+                                            </div>
+                                        </div>
+                                        <!-- buttons -->
+                                        <div class="col-sm-4 ml-3 mt-5 ">
+                                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                                <button class="btn" id="preBtn">Previous</button>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-4 float-right mr-1">
+                                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" first-card="true" data-slide="next">
+                                                <button class="btn" id="nexBtn">Next</button>
+                                                <!-- <button class="sr-only">Next</button> -->
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </nav>
+        <!-- /sidebar -->
 
         <!--Navbar  -->
         <nav id="siteNav" class="navbar navbar-expand-lg navbar-dark gtr-bg-black">
@@ -202,63 +280,9 @@
         <!-- Your Content Start Here -->
         <div class="container">
             <div class="row">
-                <div class="col-sm-8 offset-sm-2">
-                    <div id="loginCard" class="card my-auto">
-                        <div class="card-body">
-                            <nav>
-                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <a class="nav-item nav-link active" id="signin-tab" data-toggle="tab" href="#signin-container" role="tab" aria-controls="signin-container" aria-selected="true">Sign In</a>
-                                    <a class="nav-item nav-link" id="signup-tab" data-toggle="tab" href="#signup-container" role="tab" aria-controls="signup-container" aria-selected="false">Sign Up</a>
-                                </div>
-                            </nav>
-                            <div class="tab-content" id="nav-tabContent">
-                                <div class="tab-pane fade show active" id="signin-container" role="tabpanel" aria-labelledby="signin-tab">
-                                    <!-- signin -->
-                                    <div class="row">
-                                        <form id="signinForm" class="col-sm-12 needs-validation" novalidate>
-                                            <div class="form-group">
-                                                <label for="signinEmail">Email address</label>
-                                                <input type="email" class="form-control gtr-form-control" id="signinEmail" aria-describedby="emailHelp" placeholder="Enter email" required>
-                                                <div class="email-feedback">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="signinPassword">Password</label>
-                                                <input type="password" class="form-control gtr-form-control" id="signinPassword" placeholder="Password" required>
-                                                <div class="password-feedback">
-                                                </div>
-                                            </div>
-                                            <button type="submit" id="signIn" class="btn btn-danger">Sign In</button>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="signup-container" role="tabpanel" aria-labelledby="signup-tab">
-                                    <!-- signup -->
-                                    <div class="row">
-                                        <form id="signupForm" class="col-sm-12">
-                                            <div class="form-group">
-                                                <label for="signupEmail">Email address</label>
-                                                <input type="email" class="form-control gtr-form-control" id="signupEmail" aria-describedby="emailHelp" placeholder="Enter email">
-                                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                                                <div class="email-feedback">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="signupPassword">Password</label>
-                                                <input type="password" class="form-control gtr-form-control" id="signupPassword" placeholder="Password">
-                                                <div class="password-feedback">
-                                                </div>
-                                            </div>
-                                            <button type="submit" id="signUp" class="btn btn-danger">Sign Up</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="firebaseui-auth-container">
-                                <!-- google login will appear here -->
-                            </div>
-                        </div>
-                    </div>
+                <!-- images will appear here -->
+                <div class="col-sm-12">
+                    <p class="text-center text-light pt-5">Your content Goes here</p>
                 </div>
             </div>
         </div>
@@ -266,7 +290,7 @@
         <div class="push">
         </div>
         </div>
-        <!-- /wrapper -->
+        <!-- wrapper -->
         <footer class="text-center">
             © Copyright 2018 Got The Runs
         </footer>
@@ -284,7 +308,10 @@
         <script type="text/javascript" src="./assets/js/movie.js"></script>
         <script>
             $(document).ready(function() {
-                loginInit();
+                searchInit();
+                setTimeout(function() {
+                    $('#loaderOverlay').remove();
+                }, 1000);
             });
         </script>
 </body>
