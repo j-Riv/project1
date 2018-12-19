@@ -461,10 +461,15 @@ function getURLParameters(page) {
         quickSearch(options, page);
     }
     // show more button
-    var pageNumber = parseInt(page) + 1;
+    var currentURL = window.location.href;
+    var nextPageNum = parseInt(page) + 1;
+    var nextPageURL = currentURL.replace('page=' + String(page), 'page=' + String(nextPageNum));
+    if (nextPageURL === currentURL) {
+        nextPageURL = currentURL + '&page=' + nextPageNum;
+    }
     var showMore = `
         <div class="col-sm-12">
-            <button type="button" id="showMore" class="btn btn-outline-light" onClick="getURLParameters('${pageNumber}')"><i class="fas fa-plus"></i></button>
+            <a href="${nextPageURL}" id="showMore" class="btn btn-outline-light"><i class="fas fa-plus"></i></a>
         </div>
     `;
     $('#next').html(showMore);
