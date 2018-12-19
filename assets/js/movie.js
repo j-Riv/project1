@@ -669,11 +669,12 @@ $('#advancedSearchBtn').on('click', function() {
         arr.push(fActor);
     }
     if (favoriteMovie) {
-        var fMovie = 'fActor=' + encoideURI(favoriteMovie);
+        var fMovie = 'fMovie=' + encoideURI(favoriteMovie);
         arr.push(fMovie);
     }
     if (runtime) {
         var rTime = 'rTime=' + runtime;
+        arr.push(rTime);
     }
     var redirectURL = 'search.html?';
     for (var i = 0; i < arr.length; i++) {
@@ -701,4 +702,10 @@ $(document).ready(function() {
     if (window.location.href.indexOf('?') > -1) {
         getURLParameters('1');
     }
+});
+
+$('#movies').waitForImages().done(function() {
+    // All descendant images have loaded, now slide up.
+    console.log('All images have loaded');
+    removeLoader();
 });
