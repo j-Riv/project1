@@ -434,21 +434,21 @@ footer {
   color: #E53549;
 }
 
-#profile #profileContainer {
+/* #profile #profileContainer {
   position: relative;
   border-bottom: 5px solid #000;
-}
+} */
 
-#profile #profileContainer .bg-image {
+/* #profile #profileContainer .bg-image {
   background-image: url(../images/padded.png);
   filter: blur(2px);
   -webkit-filter: blur(2px);
   height: 100%;
   background-position: center;
   background-repeat: repeat;
-}
+} */
 
-#profile #profileContainer .bg-text {
+/* #profile #profileContainer .bg-text {
   color: white;
   font-weight: bold;
   position: absolute;
@@ -459,7 +459,7 @@ footer {
   width: 80%;
   padding: 20px;
   text-align: center;
-}
+} */
 
 #profile #profileContainer .bg-text #usersPhoto {
   width: 100%;
