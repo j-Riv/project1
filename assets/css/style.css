@@ -553,3 +553,12 @@ footer {
   border-color: #333;
   box-shadow: none;
 }
+
+#advSearchContainer #carousel {
+  background-color: #292929;
+}
+
+#advSearchContainer .mycard {
+  background-color: #292929;
+  border-radius: 12px;
+}
