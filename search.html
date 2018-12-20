@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.4/dist/jquery.fancybox.min.css" />
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/search.css">
+
 </head>
 
 <body id="search" class="gtr-bg-black">
@@ -74,41 +76,27 @@
                 <button class="btn btn-outline-success my-2 my-sm-0 sbsearchbtn" type="submit">Search</button>
             </form>
             <!-- Quick Search Title -->
-            <form>
-                <h5 class="sb-quicktitle">Quick Search Options</h5>
-                <div class="input-group-prepend sboptions">
-                    <label class="input-group-text" for="inputGroupSelect01">Genres</label>
-                    <select class="custom-select" id="Genre">
-                        <option selected>Choose...</option>
-                    </select>
+            <p style="text-align: center">or</p>
+            <div class="col-sm-12 accordion text-center" id="accordionQuickSearch">
+                <!-- genresearch -->
+                <div class="card">
+                    <div class="card-header" id="genreSearch">
+                        <h5 data-toggle="collapse" data-target="#collapseGenreSearch" aria-expanded="true" aria-controls="collapseGenreSearch" id="chooseGenreBtn">Choose From a Genre!</h5>
+                        <!-- <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseGenreSearch"
+                                aria-expanded="true" aria-controls="collapseGenreSearch">
+                                &#8595
+                            </button>
+                        </h5> -->
+                    </div>
+                    <div id="collapseGenreSearch" class="collapse" aria-labelledby="genreSearch" data-parent="#accordionQuickSearch">
+                        <div id="genreButtons" class="card-body">
+                            <!-- genre buttons will appear here -->
+                        </div>
+                    </div>
                 </div>
 
-                <div class="input-group-prepend sboptions">
-                    <label class="input-group-text" for="inputGroupSelect01">Rating</label>
-                    <select class="custom-select" id="Rating">
-                        <option selected>Choose...</option>
-                    </select>
-                </div>
-
-                <div class="input-group-prepend sboptions">
-                    <label class="input-group-text" for="inputGroupSelect01">Runtime</label>
-                    <select class="custom-select" id="inputGroupSelect04">
-                        <option selected>Choose...</option>
-                        <option value="1"> Below 60mins </option>
-                        <option value="2"> 60-90mins </option>
-                        <option value="3"> 90-120mins </option>
-                        <option value="4"> Above 120mins</option>
-                    </select>
-                </div>
-
-                <div class="input-group-prepend sboptions">
-                    <label class="input-group-text" for="inputGroupSelect01">Review Score</label>
-                    <select class="custom-select" id="inputGroupSelect05">
-                        <option selected>Choose...</option>
-                    </select>
-                </div>
-                <button class="btn btn-outline-success my-2 my-sm-0 sbquickbtn" type="submit">Quick Search</button>
-            </form>
+            </div>
             <!-- /T -->
             <!-- m -->
             <div id="advSearchContainer" class="container mt-3">
@@ -139,7 +127,7 @@
                                             <!-- submit button(add more question before this div) -->
                                             <div class="carousel-item  text-center" last-card="true">
                                                 <button type="submit" class="btn btn-dark" id="advancedSearchBtn">Show
-                                                                        me the flick!</button>
+                                                    me the flick!</button>
                                                 <!--closing carousel div -->
                                             </div>
                                         </div>
@@ -187,7 +175,6 @@
                 </ul>
             </div>
         </nav>
-
         <!-- Your Content Start Here -->
         <div id="movieContent" class="container">
             <div id="movies" class="row" style="margin-bottom: 30px;">
@@ -217,13 +204,6 @@
     <script type="text/javascript" src="./assets/js/movie.js"></script>
     <script>
         searchInit();
-        // $('#movies').waitForImages().done(function() {
-        //     // All descendant images have loaded, now slide up.
-        //     console.log('All images have loaded - search.html');
-        //     setTimeout(function() {
-        //         $('#loaderOverlay').remove();
-        //     }, 1000);
-        // });
     </script>
 </body>
 
