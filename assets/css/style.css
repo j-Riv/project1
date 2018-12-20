@@ -11,8 +11,12 @@ body {
   display: none;
 }
 
-.user-logged-in .hidden {
+.user-logged-in .hidden.user-movie-btn {
   display: inline-block;
+}
+
+.user-logged-in .hidden#profileMenu {
+  display: block;
 }
 
 .push {
@@ -432,8 +436,9 @@ footer {
   color: #fff;
 }
 
-#profile #profileContainer .bg-text #usersPhoto {
-  width: 100%;
+#profile #profileContainer {
+  position: relative;
+  border-bottom: 5px solid #000;
 }
 
 #profile #profileContainer #profilePicContainer img,

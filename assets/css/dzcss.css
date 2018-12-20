@@ -4,7 +4,6 @@ body {
 }
 
 @import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
-
 .settings-btn {
     position: absolute;
     top: 10px;
@@ -25,7 +24,7 @@ body {
 }
 
 #bannerImage {
-    background-image: url(../images/demoposter2.jpeg);
+    background-image: url();
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -60,7 +59,7 @@ body {
     width: 100%;
 }
 
-#profilePic { 
+#profilePic {
     border-radius: 50%;
     height: 100%;
     object-fit: cover;
@@ -70,11 +69,12 @@ body {
     font-weight: 300;
 }
 
+
 /* #profileNameDisplay {
     font-weight: 300;
 } */
 
-.favMoviePoster img{
+.favMoviePoster img {
     width: 100%;
     float: right;
 }

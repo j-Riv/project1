@@ -229,23 +229,8 @@ function genreSearch(id) {
  */
 function generalSearch(q, option) {
     // search for movie titles
-    if (option === '1') {
-        var queryURL = 'https://api.themoviedb.org/3/search/movie?api_key=' + api_key + '&query=' + q + '&sort_by=popularity.desc';
-        getMovies(queryURL);
-    }
-    // search for people - actors/actresses
-    else {
-        var queryURL = 'https://api.themoviedb.org/3/search/person?api_key=' + api_key + '&language=en-US&query=' + q;
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        }).then(function(response) {
-            console.log(response);
-            var person_id = response.results[0].id;
-            var newQueryUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=' + api_key + '&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_people=' + person_id;
-            getMovies(newQueryUrl);
-        });
-    }
+    var queryURL = 'https://api.themoviedb.org/3/search/movie?api_key=' + api_key + '&query=' + q + '&sort_by=popularity.desc';
+    getMovies(queryURL);
 }
 
 /**
@@ -261,6 +246,7 @@ function getMovies(query) {
         response.results.forEach(element => {
             displayMovie(element, $('#movies'));
         });
+        showMore(response.page, response.total_pages);
         imagesLoaded();
     });
 }
@@ -529,6 +515,7 @@ function advancedSearch(options, runtime, pg) {
             }).then(function(response) {
                 console.log(response);
                 totalResults = response.total_results;
+                var totalPages = response.total_pages;
                 console.log('totalResults: ' + totalResults);
                 response.results.forEach(movie => {
                     // do not display their favorite movie
@@ -537,6 +524,7 @@ function advancedSearch(options, runtime, pg) {
                         displayMovie(movie, $('#movies'));
                     }
                 });
+                showMore(response.page, response.total_pages);
                 imagesLoaded();
                 console.log('done running get filtered movies: ' + totalResults);
                 // if we end up needing more recommendations
@@ -620,23 +608,29 @@ function removeLoader() {
     $('#movies').show();
 }
 
+// general search button
+$('#generalSearchBtn').on('click', function() {
+    event.preventDefault();
+    var search = $('#generalSearchInput').val().trim();
+    var redirectURL = 'search.html?fMovie=' + search;
+    window.location.href = redirectURL;
+});
+
 // genre button search
 $(document).on('click', '.btn-genre', function() {
     var genre_id = $(this).attr('data-id');
-    // var redirectURL = 'http://localhost/coding-bootcamp-projects/pick-a-flick/movies.html?fGenre=' + genre_id;
     var redirectURL = 'search.html?fGenre=' + genre_id;
     window.location.href = redirectURL;
-
 });
 
 // quick search
-$('#generalSearchBtn').on('click', function() {
-    event.preventDefault();
-    var q = encodeURI($('#generalSearch').val().trim());
-    var o = $('#searchFor').val();
-    var redirectURL = 'search.html?' + o + '=' + q;
-    window.location.href = redirectURL;
-});
+// $('#generalSearchBtn').on('click', function() {
+//     event.preventDefault();
+//     var q = encodeURI($('#generalSearch').val().trim());
+//     var o = $('#searchFor').val();
+//     var redirectURL = 'search.html?' + o + '=' + q;
+//     window.location.href = redirectURL;
+// });
 
 // advanced search form
 $('#advancedSearchBtn').on('click', function() {
@@ -706,5 +700,7 @@ genreButtons();
 $(document).ready(function() {
     if (window.location.href.indexOf('?') > -1) {
         getURLParameters('1');
+    } else {
+        removeLoader();
     }
 });

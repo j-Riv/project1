@@ -72,16 +72,16 @@
             <!-- Search Title -->
             <h5 class="sb-searchtitle">Search by keyword, movie, or person</h5>
             <form class="form-inline">
-                <input class="form-control mr-sm-2 sbsearchinput" type="search" placeholder="Enter keyword, movie, or person" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0 sbsearchbtn" type="submit">Search</button>
+                <input class="form-control mr-sm-2 sbsearchinput" type="search" placeholder="Enter keyword, movie, or person" aria-label="Search" id="generalSearchInput">
+                <button class="btn btn-dark my-2 my-sm-0 sbsearchbtn" type="submit" id="generalSearchBtn"><i class="fas fa-search"></i></button>
             </form>
             <!-- Quick Search Title -->
-            <p style="text-align: center">or</p>
+            <p class="text-center mb-0">or</p>
             <div class="col-sm-12 accordion text-center" id="accordionQuickSearch">
                 <!-- genresearch -->
                 <div class="card">
-                    <div class="card-header" id="genreSearch">
-                        <h5 data-toggle="collapse" data-target="#collapseGenreSearch" aria-expanded="true" aria-controls="collapseGenreSearch" id="chooseGenreBtn">Choose From a Genre!</h5>
+                    <div id="genreSearch">
+                        <h5 data-toggle="collapse" data-target="#collapseGenreSearch" aria-expanded="true" aria-controls="collapseGenreSearch" id="chooseGenreBtn" class="btn btn-dark">Choose From a Genre!</h5>
                         <!-- <h5 class="mb-0">
                             <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseGenreSearch"
                                 aria-expanded="true" aria-controls="collapseGenreSearch">
@@ -113,7 +113,7 @@
                                             <li data-target="#thecarousel" data-slide-to="2"></li>
                                         </ol>
                                         <!-- start questions -->
-                                        <div class="carousel-inner" style="height: 150px;" id="carSearch">
+                                        <div class="carousel-inner" style="height: 100px;" id="carSearch">
                                             <div class="carousel-item active" first-card="true">
                                                 <!-- question 1 -->
                                                 <p class="text-light">Favorite Actor/Actress</p>
@@ -169,8 +169,15 @@
                     <li class="nav-item">
                         <a id="altSearch" class="nav-link active">Search <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="profile.html">Profile</a>
+                    <li class="nav-item dropleft hidden" id="profileMenu">
+                        <div class="dropdown">
+                            <a class="nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile</a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="profile.html">View Profile</a>
+                                <a class="dropdown-item" href="#" id="signOut">Sign Out</a>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>

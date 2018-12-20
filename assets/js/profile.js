@@ -27,13 +27,7 @@ function profileInit() {
             console.log(user);
             console.log('user uuid ' + user.uid);
             userUID = user.uid;
-            var navBar = $('#navList');
-            var li = `
-                <li class="nav-item">
-                    <button type="button" id="signOut" class="btn btn-outline-light">Sign Out</button>
-                </li>
-            `;
-            navBar.append(li);
+            $('body').addClass('user-logged-in');
             // check db for user data and display it
             checkDB(user);
 
