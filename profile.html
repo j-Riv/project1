@@ -79,10 +79,23 @@
                         <div class="form-group gtr-form-group">
                             <label for="favoriteGenre">Favorite Genre</label>
                             <select class="custom-select mr-sm-2" id="favoriteGenre">
-                                <option selected>Choose Genre</option>
+                                <option selected>Choose Genre...</option>
                                 <option value="Action">Action</option>
+                                <option value="Adventure">Adventure</option>
                                 <option value="Comedy">Comedy</option>
+                                <option value="Family">Family</option>
+                                <option value="Animation">Animation</option>
+                                <option value="Drama">Drama</option>
                                 <option value="Romance">Romance</option>
+                                <option value="Crime">Crime</option>
+                                <option value="Horror">Horror</option>
+                                <option value="Mystery">Mystery</option>
+                                <option value="Thriller">Thriller</option>
+                                <option value="Sci-fi">Sci-fi</option>
+                                <option value="War">War</option>
+                                <option value="History">History</option>
+                                <option value="Documentary">Documentary</option>
+
                             </select>
                         </div>
                         <div class="form-group">
@@ -276,20 +289,20 @@
             <div class="jumbotron jumbotron-fluid mb-0">
                 <div class="container-fluid" id="bannerImage"></div>
                 <i class="fas fa-user-cog settings-btn" data-toggle="modal" data-target="#settingsModal"></i>
-                <div class="container-fluid my-auto h-50" id="shadowBox"></div>
+                <div class="container-fluid h-100" id="shadowBox"></div>
                 <div class="container-fluid" id="jumboText">
-                    <div class="row">
-                        <div class="col-md-3" id="profilePicContainer">
+                    <div class="row h-100">
+                        <div class="col-md-3 my-auto" id="profilePicContainer">
                             <img src="./assets/images/dummy-data/default-profile-img.jpg" alt="profile picture" id="profilePic">
                         </div>
-                        <div class="col-md-6" id="profileNameDisplay">
+                        <div class="col-md-6 my-auto" id="profileNameDisplay">
                             <h1 id="name" class='text-light'>---- ----</h1>
                             <h4 class="text-light">Email: <span id="email">----</span></h4>
                             <h4 class="text-light">Movies Watched: <span id="movieWatched">--</span></h4>
                             <h4 class="text-light">Favorite Genre: <span id="favGenre">----</span></h4>
                             <h4 class="text-light">Favorite Movie: <span id="favMovie">----</span></h4>
                         </div>
-                        <div class="col-md-3" id="favMovieContainer">
+                        <div class="col-md-3 my-auto" id="favMovieContainer">
                             <img src="./assets/images/dummy-data/demoposter.jpeg" alt="favorite movie poster" id="favMoviePoster">
                         </div>
                     </div>

@@ -152,34 +152,34 @@ function getMovies(user) {
 }
 
 
-function movies() {
-    // movies
-    var favMovies = [
-        '293452',
-        '46096',
-        '424319',
-        '13020'
-    ];
-    favMovies.forEach(movie => {
-        getMovie(movie, $('#favoritedMovies'));
-    });
-    var watchedMovies = [
-        '428078',
-        '507569',
-        '383498',
-        '507569'
-    ];
-    watchedMovies.forEach(movie => {
-        getMovie(movie, $('#watchedMovies'));
-    });
-    // checks for loaded images
-    $('#movies').waitForImages().done(function() {
-        // All descendant images have loaded, now slide up.
-        console.log('All images have loaded');
-        removeLoader();
-    });
-    $('#profileCard').addClass('loaded');
-}
+// function movies() {
+//     // movies
+//     var favMovies = [
+//         '293452',
+//         '46096',
+//         '424319',
+//         '13020'
+//     ];
+//     favMovies.forEach(movie => {
+//         getMovie(movie, $('#favoritedMovies'));
+//     });
+//     var watchedMovies = [
+//         '428078',
+//         '507569',
+//         '383498',
+//         '507569'
+//     ];
+//     watchedMovies.forEach(movie => {
+//         getMovie(movie, $('#watchedMovies'));
+//     });
+//     // checks for loaded images
+//     $('#movies').waitForImages().done(function() {
+//         // All descendant images have loaded, now slide up.
+//         console.log('All images have loaded');
+//         removeLoader();
+//     });
+//     $('#profileCard').addClass('loaded');
+// }
 
 /**
  * gets movie and puts it in the selected container
