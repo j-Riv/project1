@@ -212,6 +212,23 @@ a.article:hover {
 }
 
 /* all pages styles */
+#sidebar div:focus {
+  outline: none;
+}
+
+#sidebar #advSearchContainer #carousel {
+  background-color: #292929;
+}
+
+#sidebar #advSearchContainer .mycard {
+  background-color: #292929;
+  border-radius: 12px;
+}
+
+#sidebar #advSearchContainer:focus {
+  outline: none;
+}
+
 #siteNav {
   z-index: 100;
   background-color: #000;
@@ -233,36 +250,6 @@ a.article:hover {
 
 #siteNav a {
   cursor: pointer;
-}
-
-#siteNav #searchContent #accordionQuickSearch .card {
-  border: 1px solid #505050;
-  border-bottom: none;
-  background-color: #505050;
-}
-
-#siteNav #searchContent #accordionQuickSearch .card .card-header {
-  background-color: #000;
-  border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
-}
-
-#siteNav #searchContent #accordionQuickSearch .card .card-header h5 .btn-link {
-  color: #505050;
-  text-transform: uppercase;
-  text-decoration: none;
-}
-
-#siteNav #searchContent #accordionQuickSearch .card .card-body {
-  background-color: #333;
-}
-
-#siteNav #searchContent #accordionQuickSearch .card .card-body .btn-genre {
-  margin: 5px;
-}
-
-#siteNav #searchContent #accordionQuickSearch .card .card-body #generalSearchForm .input-group-prepend label {
-  background-color: #343a40;
-  color: #fff;
 }
 
 .wrapper {
@@ -361,7 +348,7 @@ footer {
 }
 
 /* search page */
-#movie .wrapper {
+#search .wrapper {
   padding-top: 66px;
   min-height: 100%;
   /* Equal to height of footer */
@@ -369,97 +356,81 @@ footer {
   margin-bottom: -30px;
 }
 
-#movie .push {
+#search .push {
   height: 30px;
 }
 
-#movie #movieContent #accordionQuickSearch .card {
+#search #movieContent #accordionQuickSearch .card {
   border: 1px solid #505050;
   border-bottom: none;
   background-color: #505050;
 }
 
-#movie #movieContent #accordionQuickSearch .card .card-header {
+#search #movieContent #accordionQuickSearch .card .card-header {
   background-color: #000;
   border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
 }
 
-#movie #movieContent #accordionQuickSearch .card .card-header h5 .btn-link {
+#search #movieContent #accordionQuickSearch .card .card-header h5 .btn-link {
   color: #505050;
   text-transform: uppercase;
   text-decoration: none;
 }
 
-#movie #movieContent #accordionQuickSearch .card .card-body {
+#search #movieContent #accordionQuickSearch .card .card-body {
   background-color: #333;
 }
 
-#movie #movieContent #accordionQuickSearch .card .card-body .btn-genre {
+#search #movieContent #accordionQuickSearch .card .card-body .btn-genre {
   margin: 5px;
 }
 
-#movie #movieContent #accordionQuickSearch .card .card-body #generalSearchForm .input-group-prepend label {
+#search #movieContent #accordionQuickSearch .card .card-body #generalSearchForm .input-group-prepend label {
   background-color: #343a40;
   color: #fff;
 }
 
-#movie #movieContent #movies {
+#search #movieContent #movies {
   min-height: 250px;
 }
 
-#movie .movie-container {
+#search .movie-container {
   box-sizing: border-box;
   padding: 10px;
   cursor: pointer;
 }
 
-#movie .movie-container img {
+#search .movie-container img {
   width: 100%;
   transition: all 1s;
 }
 
-#movie .movie-container img:hover {
+#search .movie-container img:hover {
   opacity: 0.5;
 }
 
-#movie #movieModalCenter .modal-content {
+#search #movieModalCenter .modal-content {
   padding: 20px;
 }
 
-#movie #movieModalCenter .modal-content img {
+#search #movieModalCenter .modal-content img {
   width: 100%;
 }
 
-#movie #movieModalCenter .modal-content .video-trailer {
+#search #movieModalCenter .modal-content .video-trailer {
   color: #E53549;
 }
 
-/* #profile #profileContainer {
-  position: relative;
-  border-bottom: 5px solid #000;
-} */
+#search #showMore {
+  border: 1px solid #505050;
+  color: #505050;
+  transition: 500ms all;
+}
 
-/* #profile #profileContainer .bg-image {
-  background-image: url(../images/padded.png);
-  filter: blur(2px);
-  -webkit-filter: blur(2px);
-  height: 100%;
-  background-position: center;
-  background-repeat: repeat;
-} */
-
-/* #profile #profileContainer .bg-text {
-  color: white;
-  font-weight: bold;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  width: 80%;
-  padding: 20px;
-  text-align: center;
-} */
+#search #showMore:hover {
+  background-color: #505050;
+  color: #fff;
+}
 
 #profile #profileContainer .bg-text #usersPhoto {
   width: 100%;
@@ -552,13 +523,4 @@ footer {
 #profile #updateProfileForm .gtr-form-control:focus {
   border-color: #333;
   box-shadow: none;
-}
-
-#advSearchContainer #carousel {
-  background-color: #292929;
-}
-
-#advSearchContainer .mycard {
-  background-color: #292929;
-  border-radius: 12px;
 }

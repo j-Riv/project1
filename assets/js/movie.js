@@ -1,4 +1,4 @@
-// TMDB Configuration save to local so we don't have to pull it.
+// TMDb Configuration save to local so we don't have to pull it.
 // Will write func to pull if needed
 // configuration should never change unless majore api update
 var configuration = {
@@ -218,12 +218,7 @@ function genreSearch(id) {
         response.results.forEach(result => {
             displayMovie(result, $('#movies'));
         });
-        // checks for loaded images
-        $('#movies').waitForImages().done(function() {
-            // All descendant images have loaded, now slide up.
-            console.log('All images have loaded');
-            removeLoader();
-        });
+        imagesLoaded();
     });
 }
 
@@ -266,12 +261,7 @@ function getMovies(query) {
         response.results.forEach(element => {
             displayMovie(element, $('#movies'));
         });
-        // checks for loaded images
-        $('#movies').waitForImages().done(function() {
-            // All descendant images have loaded, now slide up.
-            console.log('All images have loaded');
-            removeLoader();
-        });
+        imagesLoaded();
     });
 }
 
@@ -283,7 +273,7 @@ function getMovies(query) {
  */
 function displayMovie(movie, container) {
     if (movie.poster_path !== null) {
-        var poster = configuration.images.base_url + configuration.images.poster_sizes[6] + movie.poster_path;
+        var poster = configuration.images.secure_base_url + configuration.images.poster_sizes[6] + movie.poster_path;
 
         var movieContainer = `
             <div class="col-sm-6 col-md-3 movie-container" data-id="${movie.id}">
@@ -321,7 +311,7 @@ function movieDetails(id) {
         method: "GET"
     }).then(function(response) {
         console.log(response);
-        var poster = configuration.images.base_url + configuration.images.poster_sizes[6] + response.poster_path;
+        var poster = configuration.images.secure_base_url + configuration.images.poster_sizes[6] + response.poster_path;
         var youtube_key = response.videos.results[0].key;
         console.log('youtube: ' + youtube_key);
         // make a template for modal click on movie info
@@ -353,52 +343,14 @@ function movieDetails(id) {
 }
 
 /**
- * gets movies based on a query
- * it excludes the movie searched
- * @param {string} movieID - the movie id for movie to exclude
- * @param {string} query - the query
- */
-function getFilteredMovies(movieID, query) {
-    var totalResults;
-    $.ajax({
-        url: query,
-        method: "GET"
-    }).then(function(response) {
-        console.log(response);
-        totalResults = response.total_results;
-        response.results.forEach(movie => {
-            // do not display their favorite movie
-            if (movie.id !== movieID) {
-                console.log('current movie id: (' + movie.id + ') does not equal filtered id: (' + movieID + ')');
-                displayMovie(movie, $('#movies'));
-            }
-        });
-        // checks for loaded images
-        $('#movies').waitForImages().done(function() {
-            // All descendant images have loaded, now slide up.
-            console.log('All images have loaded');
-            removeLoader();
-        });
-    });
-    return totalResults;
-}
-
-/**
  * get search options from url if they exist
  */
 function getURLParameters(page) {
     console.log('getting url params');
     // clear
     // $('#movies').empty();
-    // add loader
-    addLoader();
     var pageURL = window.location.search.substring(1);
     var urlParams = [];
-    // testing urls delete later
-    // var pageURL = 'http://localhost/coding-bootcamp-projects/pick-a-flick/movies.html?fActor=keanu%20reeves&rTime=120&fMovie=john%20wick';
-    // var pageURL = 'http://localhost/coding-bootcamp-projects/pick-a-flick/movies.html?fActor=keanu%20reeves';
-    // var pageURL = 'http://localhost/coding-bootcamp-projects/pick-a-flick/movies.html?fMovie=john%20wick';
-    // var search = decodeURIComponent(window.location.href.slice(window.location.href.indexOf('?') + 1));
     var search = pageURL.slice(pageURL.indexOf('?') + 1);
     console.log('the search url: ' + search);
     var urlVariables = search.split('&');
@@ -460,19 +412,6 @@ function getURLParameters(page) {
         console.log('running quick search option');
         quickSearch(options, page);
     }
-    // show more button
-    var currentURL = window.location.href;
-    var nextPageNum = parseInt(page) + 1;
-    var nextPageURL = currentURL.replace('page=' + String(page), 'page=' + String(nextPageNum));
-    if (nextPageURL === currentURL) {
-        nextPageURL = currentURL + '&page=' + nextPageNum;
-    }
-    var showMore = `
-        <div class="col-sm-12">
-            <a href="${nextPageURL}" id="showMore" class="btn btn-outline-light"><i class="fas fa-plus"></i></a>
-        </div>
-    `;
-    $('#next').html(showMore);
 }
 
 /**
@@ -582,59 +521,102 @@ function advancedSearch(options, runtime, pg) {
             console.log('The final url: ' + finalURL);
             // get and display movie recommendations without displaying the users favorite movie
             console.log('running get filtered movies');
-            var totalResults = getFilteredMovies(movieID, finalURL);
-            console.log('done running get filtered movies');
-            // if we end up needing more recommendations
-            if (parseInt(totalResults) < 8) {
-                console.log('I think we need more movies. Lets get some.');
-                // this might end up showing duplicates though
-                // response.results.forEach(result => {
-                //     var resID = result.id;
-                //     var rec = 'https://api.themoviedb.org/3/movie/' + resID + '/recommendations?api_key=' + api_key + '&language=en-US&page=1';
-                //     getMovies(rec);
-                // });
-                // instead we might just search recommendations of 1st from response list
-                // first or random havent decided
-                var ep = [
-                    'recommendations',
-                    'similar'
-                ];
-                // random id from results
-                var randomID = response.results[Math.floor(Math.random() * response.results.length)].id;
-                // random endpoint
-                var randomEP = ep[Math.floor(Math.random() * ep.length)];
-                console.log('We will use random id:(' + randomID + ')');
-                // var recID = response.results[0].id;
-                var rec = 'https://api.themoviedb.org/3/movie/' + randomID + '/' + randomEP + '?api_key=' + api_key + '&language=en-US&page=1';
-                getMovies(rec);
-            }
+            // get filtered movies
+            var totalResults;
+            $.ajax({
+                url: finalURL,
+                method: "GET"
+            }).then(function(response) {
+                console.log(response);
+                totalResults = response.total_results;
+                console.log('totalResults: ' + totalResults);
+                response.results.forEach(movie => {
+                    // do not display their favorite movie
+                    if (movie.id !== movieID) {
+                        console.log('current movie id: (' + movie.id + ') does not equal filtered id: (' + movieID + ')');
+                        displayMovie(movie, $('#movies'));
+                    }
+                });
+                imagesLoaded();
+                console.log('done running get filtered movies: ' + totalResults);
+                // if we end up needing more recommendations
+                if (parseInt(totalResults) < 8) {
+                    console.log('I think we need more movies. Lets get some.');
+                    // this might end up showing duplicates though
+                    // response.results.forEach(result => {
+                    //     var resID = result.id;
+                    //     var rec = 'https://api.themoviedb.org/3/movie/' + resID + '/recommendations?api_key=' + api_key + '&language=en-US&page=1';
+                    //     getMovies(rec);
+                    // });
+                    // instead we might just search recommendations of 1st from response list
+                    // first or random havent decided
+                    var ep = [
+                        'recommendations',
+                        'similar'
+                    ];
+                    // random id from results
+                    var randomID = response.results[Math.floor(Math.random() * response.results.length)].id;
+                    // random endpoint
+                    var randomEP = ep[Math.floor(Math.random() * ep.length)];
+                    console.log('We will use random id:(' + randomID + ')');
+                    // var recID = response.results[0].id;
+                    var rec = 'https://api.themoviedb.org/3/movie/' + randomID + '/' + randomEP + '?api_key=' + api_key + '&language=en-US&page=1';
+                    addLoaderOverlay();
+                    getMovies(rec);
+                }
+            });
         }
     })();
 }
 
 /**
- * adds loader to dom
+ * adds the loader & overlay to the dom
  */
-function addLoader() {
-    $('#movies').hide();
+function addLoaderOverlay() {
     var loader = `
-        <div id="circle">
-            <div class="loader">
+        <div id="loaderOverlay">
+            <div id="pageLoader">
                 <div class="loader">
                     <div class="loader">
                         <div class="loader">
-
+                            <div class="loader">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     `;
-    $('#loader').append(loader);
+    $('body').prepend();
 }
 
+/**
+ * checks to see if images have been loaded then calls the removeLoader function
+ */
+function imagesLoaded() {
+    $('#movies').waitForImages({
+        finished: function() {
+            // ...
+            console.log('All images have loaded');
+        },
+        each: function() {
+            // ...
+            console.log('image loaded');
+        },
+        waitForAll: true
+    });
+    $('#movies').waitForImages(true).done(function() {
+        // ...
+        console.log('removing loader');
+        removeLoader();
+    });
+}
+
+/**
+ * removes the loader and displays movies
+ */
 function removeLoader() {
-    $('#circle').remove();
+    $('#loaderOverlay').remove();
     $('#movies').show();
 }
 
@@ -665,11 +647,11 @@ $('#advancedSearchBtn').on('click', function() {
 
     var arr = [];
     if (favoriteActor) {
-        var fActor = 'fActor=' + encoideURI(favoriteActor);
+        var fActor = 'fActor=' + encodeURI(favoriteActor);
         arr.push(fActor);
     }
     if (favoriteMovie) {
-        var fMovie = 'fMovie=' + encoideURI(favoriteMovie);
+        var fMovie = 'fMovie=' + encodeURI(favoriteMovie);
         arr.push(fMovie);
     }
     if (runtime) {
@@ -688,6 +670,29 @@ $('#advancedSearchBtn').on('click', function() {
 });
 
 /**
+ * creates the show more movies button
+ * @param {string} page - current page
+ * @param {string} totalPages - total number of pages
+ */
+function showMore(page, totalPages) {
+    if (totalPages > 1 && page < totalPages) {
+        // show more button
+        var currentURL = window.location.href;
+        var nextPageNum = parseInt(page) + 1;
+        var nextPageURL = currentURL.replace('page=' + String(page), 'page=' + String(nextPageNum));
+        if (nextPageURL === currentURL) {
+            nextPageURL = currentURL + '&page=' + nextPageNum;
+        }
+        var showMore = `
+        <div class="col-sm-12 pb-5">
+            <a href="${nextPageURL}" id="showMore" class="btn">Show More <i class="fas fa-plus"></i></a>
+        </div>
+    `;
+        $('#next').html(showMore);
+    }
+}
+
+/**
  * sets up fancybox for dynamic movie trailers
  */
 $().fancybox({
@@ -702,10 +707,4 @@ $(document).ready(function() {
     if (window.location.href.indexOf('?') > -1) {
         getURLParameters('1');
     }
-});
-
-$('#movies').waitForImages().done(function() {
-    // All descendant images have loaded, now slide up.
-    console.log('All images have loaded');
-    removeLoader();
 });

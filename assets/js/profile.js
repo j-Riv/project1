@@ -235,7 +235,7 @@ function updateMoviePoster(fm) {
         method: "GET"
     }).then(function(response) {
         console.log(response);
-        var poster = 'http://image.tmdb.org/t/p/original' + response.results[0].poster_path;
+        var poster = 'https://image.tmdb.org/t/p/original' + response.results[0].poster_path;
         $('#favMoviePoster').attr('src', poster);
         changeBg(poster);
     });
