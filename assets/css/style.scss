@@ -20,7 +20,12 @@ body {
 
 .user-logged-in {
     .hidden {
-        display: inline-block;
+        &.user-movie-btn {
+            display: inline-block;
+        }
+        &#profileMenu {
+            display: block;
+        }
     }
 }
 
@@ -492,29 +497,6 @@ footer {
     #profileContainer {
         position: relative;
         border-bottom: 5px solid #000;
-        .bg-image {
-            background-image: url(../images/padded.png);
-            filter: blur(2px);
-            -webkit-filter: blur(2px);
-            height: 100%;
-            background-position: center;
-            background-repeat: repeat;
-        }
-        .bg-text {
-            color: white;
-            font-weight: bold;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
-            width: 80%;
-            padding: 20px;
-            text-align: center;
-            #usersPhoto {
-                width: 100%;
-            }
-        }
         #profilePicContainer,
         #favMovieContainer {
             img {

@@ -23,18 +23,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.4/dist/jquery.fancybox.min.css" />
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/search.css">
 </head>
 
 <body id="index" class="gtr-bg-black">
-    <!-- modal -->
-    <div class="modal fade" id="movieModalCenter" tabindex="-1" role="dialog" aria-labelledby="movieModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content" id="movieModelContent">
-                <!-- movie content should appear here -->
-            </div>
-        </div>
-    </div>
-    <!-- modal -->
     <div class="wrapper">
         <!-- Sidebar with Nav  -->
         <nav id="sidebar">
@@ -42,9 +34,39 @@
                 <i class="fas fa-arrow-left"></i>
             </div>
             <!-- Sidebar Head -->
+            <!-- T -->
             <div class="sidebar-header">
                 <h3>Search</h3>
             </div>
+            <!-- Search Title -->
+            <h5 class="sb-searchtitle">Search by keyword, movie, or person</h5>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2 sbsearchinput" type="search" placeholder="Enter keyword, movie, or person" aria-label="Search" id="generalSearchInput">
+                <button class="btn btn-dark my-2 my-sm-0 sbsearchbtn" type="submit" id="generalSearchBtn"><i class="fas fa-search"></i></button>
+            </form>
+            <!-- Quick Search Title -->
+            <p class="text-center mb-0">or</p>
+            <div class="col-sm-12 accordion text-center" id="accordionQuickSearch">
+                <!-- genresearch -->
+                <div class="card">
+                    <div id="genreSearch">
+                        <h5 data-toggle="collapse" data-target="#collapseGenreSearch" aria-expanded="true" aria-controls="collapseGenreSearch" id="chooseGenreBtn" class="btn btn-dark">Choose From a Genre!</h5>
+                        <!-- <h5 class="mb-0">
+                                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseGenreSearch"
+                                                aria-expanded="true" aria-controls="collapseGenreSearch">
+                                                &#8595
+                                            </button>
+                                        </h5> -->
+                    </div>
+                    <div id="collapseGenreSearch" class="collapse" aria-labelledby="genreSearch" data-parent="#accordionQuickSearch">
+                        <div id="genreButtons" class="card-body">
+                            <!-- genre buttons will appear here -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /T -->
             <!-- m -->
             <div id="advSearchContainer" class="container mt-3">
                 <div class="row">
@@ -60,7 +82,7 @@
                                             <li data-target="#thecarousel" data-slide-to="2"></li>
                                         </ol>
                                         <!-- start questions -->
-                                        <div class="carousel-inner" style="height: 150px;" id="carSearch">
+                                        <div class="carousel-inner" style="height: 100px;" id="carSearch">
                                             <div class="carousel-item active" first-card="true">
                                                 <!-- question 1 -->
                                                 <p class="text-light">Favorite Actor/Actress</p>
@@ -99,7 +121,6 @@
             </div>
             <!-- m -->
         </nav>
-
         <!--Navbar  -->
         <nav id="siteNav" class="navbar navbar-expand-lg navbar-dark gtr-bg-black">
             <a class="navbar-brand" href="index.html">
@@ -111,13 +132,20 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto" id="navList">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link active" href="index.html">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a id="altSearch" class="nav-link active">Search <span class="sr-only">(current)</span></a>
+                        <a id="altSearch" class="nav-link">Search</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="profile.html">Profile</a>
+                    <li class="nav-item dropleft hidden" id="profileMenu">
+                        <div class="dropdown">
+                            <a class="nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile</a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="profile.html">View Profile</a>
+                                <a class="dropdown-item" href="#" id="signOut">Sign Out</a>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>

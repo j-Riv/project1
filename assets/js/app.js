@@ -88,15 +88,7 @@ function searchInit() {
             console.log(user);
             console.log('user uuid' + user.uid);
             userUID = user.uid;
-            var navBar = $('#navList');
-            var li = `
-                <li class="nav-item">
-                    <button type="button" id="signOut" class="btn btn-outline-light">Sign Out</button>
-                </li>
-            `;
             $('body').addClass('user-logged-in');
-            // $('.user-movie-btn').removeClass('hidden');
-            navBar.append(li);
             // check db for user data if no data write user data
             checkDB(user);
         } else {
