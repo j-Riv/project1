@@ -196,14 +196,14 @@ ul.CTAs a {
 }
 
 #genreButtons::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px black;
-    -webkit-border-radius: 10px;
+    box-shadow: inset 0 0 6px black;
+    border-radius: 10px;
     border-radius: 10px;
 }
 
 #genreButtons::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 10px;
+    border-radius: 10px;
     border-radius: 10px;
     background: gray;
-    -webkit-box-shadow: inset 0 0 6px gray;
+    box-shadow: inset 0 0 6px gray;
 }

@@ -99,7 +99,7 @@ function displayProfile(user) {
     $('#updateName').val(name);
     $('#setProfilePic').val(profileImg);
     $('#favoriteGenre').val(favoriteGenre);
-    $('#favoriteMovie').val(favoriteMovie);
+    $('#favoriteFlick').val(favoriteMovie);
     // update page
     var usersPhoto = $('#profilePic');
     var usersName = $('#name');
@@ -213,7 +213,7 @@ $('#updateProfileBtn').on('click', function() {
     var updatedName = $('#updateName').val().trim();
     var updatedPhoto = $('#setProfilePic').val().trim();
     var favoriteGenre = $('#favoriteGenre').val().trim();
-    var favoriteMovie = $('#favoriteMovie').val().trim();
+    var favoriteMovie = $('#favoriteFlick').val().trim();
     database.ref('/users/' + userUID).update({
         name: updatedName,
         imageUrl: updatedPhoto,
