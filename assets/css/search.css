@@ -188,7 +188,9 @@ ul.CTAs a {
 #genreButtons {
     display: grid;
     overflow-y: auto;
-    height: 220px;
+    height: 140px;
+    margin-top: -3px;
+    margin-bottom: 5px;
 }
 
 #genreButtons::-webkit-scrollbar {
@@ -206,4 +208,33 @@ ul.CTAs a {
     border-radius: 10px;
     background: gray;
     box-shadow: inset 0 0 6px gray;
+}
+
+#languageButtons {
+    display: grid;
+    overflow-y: auto;
+    height: 140px;
+    margin-top: -3px;
+    margin-bottom: 5px;
+}
+
+#languageButtons::-webkit-scrollbar {
+    width: 5px;
+}
+
+#languageButtons::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px black;
+    border-radius: 10px;
+    border-radius: 10px;
+}
+
+#languageButtons::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    border-radius: 10px;
+    background: gray;
+    box-shadow: inset 0 0 6px gray;
+}
+
+#yearInput {
+    width: 250px!important;
 }
