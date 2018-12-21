@@ -529,3 +529,7 @@ footer {
   border-color: #333;
   box-shadow: none;
 }
+
+#profile .user-movie-btn {
+  display: none !important;
+}
