@@ -151,6 +151,34 @@ function languageBtns() {
     });
 }
 
+function ratingBtns() {
+    var ratings = [{
+        "certification": "G",
+        "order": 1
+    },
+    {
+        "certification": "PG",
+        "order": 2
+    },
+    {
+        "certification": "PG-13",
+        "order": 3
+    },
+    {
+        "certification": "R",
+        "order": 4
+    }
+    ];
+    Object.keys(ratings).forEach(function (key) {
+        var ratingBtn = `
+                <button class="btn btn-dark btn-rating" data-id="${ratings[key].certification}">${ratings[key].certification}</button>
+            `;
+        $('#ratingButtons').append(ratingBtn);
+        // console.log("appended language btn");
+    });
+}
+ratingBtns();
+
 /**
  * generates buttons used for searching by genre
  */
@@ -455,6 +483,15 @@ function getURLParameters(page) {
             };
             options.push(yearObj);
         }
+        // rating
+        if (urlParams[key].name === 'rating') {
+            var ratingObj = {
+                name: 'rating',
+                searchFor: urlParams[key].searchFor,
+                endPoint: 'discover/movie'
+            };
+            options.push(ratingObj);
+        }
     });
     // calculate how many params and what to search
     var numOfOptions = options.length;
@@ -485,7 +522,11 @@ function quickSearch(option, pg) {
     } else if (option[0].name === 'language') {
         var queryURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + api_key + '&sort_by=popularity.desc&include_adult=false&include_video=false&page=' + pg + '&language=' + option[0].searchFor;
         getMovies(queryURL);
-    } else if (option[0].name === 'year') {
+    } else if (option[0].name === 'rating') {
+        var queryURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + api_key + '&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=' + pg + '&certification_country=US&certification.lte=' + option[0].searchFor;
+        getMovies(queryURL);
+    }
+        else if (option[0].name === 'year') {
         var queryURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + api_key + '&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=' + pg + '&primary_release_year=' + option[0].searchFor;
         getMovies(queryURL);
     }
@@ -711,6 +752,12 @@ $(document).on('click', '.btn-genre', function () {
 $(document).on('click', '.btn-language', function () {
     var language_id = $(this).attr('data-id');
     var redirectURL = 'search.html?language=' + language_id;
+    window.location.href = redirectURL;
+});
+// ratings
+$(document).on('click', '.btn-rating', function () {
+    var rating = $(this).attr('data-id');
+    var redirectURL = 'search.html?rating=' + rating;
     window.location.href = redirectURL;
 });
 
