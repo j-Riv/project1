@@ -102,47 +102,47 @@ var api_key = '564b2e11aa606d7083773b2abc3fb126';
 
 function languageBtns() {
     var languages = [{
-        "iso_639_1": "en",
-        "name": "English"
-    },
-    {
-        "iso_639_1": "es",
-        "name": "Spanish"
-    },
-    {
-        "iso_639_1": "zh",
-        "name": "Chinese"
-    },
-    {
-        "iso_639_1": "ja",
-        "name": "Japanese"
-    },
-    {
-        "iso_639_1": "ko",
-        "name": "Korean"
-    },
-    {
-        "iso_639_1": "fr",
-        "name": "French"
-    },
-    {
-        "iso_639_1": "de",
-        "name": "German"
-    },
-    {
-        "iso_639_1": "it",
-        "name": "Italian"
-    },
-    {
-        "iso_639_1": "ru",
-        "name": "Russian"
-    },
-    {
-        "iso_639_1": "pt",
-        "name": "Portuguese"
-    }
+            "iso_639_1": "en",
+            "name": "English"
+        },
+        {
+            "iso_639_1": "es",
+            "name": "Spanish"
+        },
+        {
+            "iso_639_1": "zh",
+            "name": "Chinese"
+        },
+        {
+            "iso_639_1": "ja",
+            "name": "Japanese"
+        },
+        {
+            "iso_639_1": "ko",
+            "name": "Korean"
+        },
+        {
+            "iso_639_1": "fr",
+            "name": "French"
+        },
+        {
+            "iso_639_1": "de",
+            "name": "German"
+        },
+        {
+            "iso_639_1": "it",
+            "name": "Italian"
+        },
+        {
+            "iso_639_1": "ru",
+            "name": "Russian"
+        },
+        {
+            "iso_639_1": "pt",
+            "name": "Portuguese"
+        }
     ];
-    Object.keys(languages).forEach(function (key) {
+    Object.keys(languages).forEach(function(key) {
         var languageBtn = `
                 <button class="btn btn-dark btn-language" data-id="${languages[key].iso_639_1}">${languages[key].name}</button>
             `;
@@ -153,23 +153,23 @@ function languageBtns() {
 
 function ratingBtns() {
     var ratings = [{
-        "certification": "G",
-        "order": 1
-    },
-    {
-        "certification": "PG",
-        "order": 2
-    },
-    {
-        "certification": "PG-13",
-        "order": 3
-    },
-    {
-        "certification": "R",
-        "order": 4
-    }
+            "certification": "G",
+            "order": 1
+        },
+        {
+            "certification": "PG",
+            "order": 2
+        },
+        {
+            "certification": "PG-13",
+            "order": 3
+        },
+        {
+            "certification": "R",
+            "order": 4
+        }
     ];
-    Object.keys(ratings).forEach(function (key) {
+    Object.keys(ratings).forEach(function(key) {
         var ratingBtn = `
                 <button class="btn btn-dark btn-rating" data-id="${ratings[key].certification}">${ratings[key].certification}</button>
             `;
@@ -177,7 +177,6 @@ function ratingBtns() {
         // console.log("appended language btn");
     });
 }
-ratingBtns();
 
 /**
  * generates buttons used for searching by genre
@@ -198,84 +197,84 @@ function genreButtons() {
     // });
     // local array for genres
     var genres = [{
-        "id": 28,
-        "name": "Action"
-    },
-    {
-        "id": 12,
-        "name": "Adventure"
-    },
-    {
-        "id": 16,
-        "name": "Animation"
-    },
-    {
-        "id": 35,
-        "name": "Comedy"
-    },
-    {
-        "id": 80,
-        "name": "Crime"
-    },
-    {
-        "id": 99,
-        "name": "Documentary"
-    },
-    {
-        "id": 18,
-        "name": "Drama"
-    },
-    {
-        "id": 10751,
-        "name": "Family"
-    },
-    {
-        "id": 14,
-        "name": "Fantasy"
-    },
-    {
-        "id": 36,
-        "name": "History"
-    },
-    {
-        "id": 27,
-        "name": "Horror"
-    },
-    {
-        "id": 10402,
-        "name": "Music"
-    },
-    {
-        "id": 9648,
-        "name": "Mystery"
-    },
-    {
-        "id": 10749,
-        "name": "Romance"
-    },
-    {
-        "id": 878,
-        "name": "Science Fiction"
-    },
-    {
-        "id": 10770,
-        "name": "TV Movie"
-    },
-    {
-        "id": 53,
-        "name": "Thriller"
-    },
-    {
-        "id": 10752,
-        "name": "War"
-    },
-    {
-        "id": 37,
-        "name": "Western"
-    }
+            "id": 28,
+            "name": "Action"
+        },
+        {
+            "id": 12,
+            "name": "Adventure"
+        },
+        {
+            "id": 16,
+            "name": "Animation"
+        },
+        {
+            "id": 35,
+            "name": "Comedy"
+        },
+        {
+            "id": 80,
+            "name": "Crime"
+        },
+        {
+            "id": 99,
+            "name": "Documentary"
+        },
+        {
+            "id": 18,
+            "name": "Drama"
+        },
+        {
+            "id": 10751,
+            "name": "Family"
+        },
+        {
+            "id": 14,
+            "name": "Fantasy"
+        },
+        {
+            "id": 36,
+            "name": "History"
+        },
+        {
+            "id": 27,
+            "name": "Horror"
+        },
+        {
+            "id": 10402,
+            "name": "Music"
+        },
+        {
+            "id": 9648,
+            "name": "Mystery"
+        },
+        {
+            "id": 10749,
+            "name": "Romance"
+        },
+        {
+            "id": 878,
+            "name": "Science Fiction"
+        },
+        {
+            "id": 10770,
+            "name": "TV Movie"
+        },
+        {
+            "id": 53,
+            "name": "Thriller"
+        },
+        {
+            "id": 10752,
+            "name": "War"
+        },
+        {
+            "id": 37,
+            "name": "Western"
+        }
     ];
     // loop through genres and generate the buttons
-    Object.keys(genres).forEach(function (key) {
+    Object.keys(genres).forEach(function(key) {
         var button = `
                 <button class="btn btn-dark btn-genre" data-id="${genres[key].id}">${genres[key].name}</button>
             `;
@@ -292,7 +291,7 @@ function genreSearch(id) {
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(function (response) {
+    }).then(function(response) {
         console.log(response);
         response.results.forEach(result => {
             displayMovie(result, $('#movies'));
@@ -320,7 +319,7 @@ function getMovies(query) {
     $.ajax({
         url: query,
         method: "GET"
-    }).then(function (response) {
+    }).then(function(response) {
         console.log(response);
         response.results.forEach(element => {
             displayMovie(element, $('#movies'));
@@ -355,7 +354,7 @@ function displayMovie(movie, container) {
 
 // bind click function to document
 // movie posters will be dynamically created
-$(document).on('click', '.movie-poster', function () {
+$(document).on('click', '.movie-poster', function() {
     var movie_id = $(this).attr('data-id');
     console.log('movie id: ' + movie_id);
     movieDetails(movie_id);
@@ -374,7 +373,7 @@ function movieDetails(id) {
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(function (response) {
+    }).then(function(response) {
         console.log(response);
         var poster = configuration.images.secure_base_url + configuration.images.poster_sizes[6] + response.poster_path;
         var youtube_key = response.videos.results[0].key;
@@ -430,7 +429,7 @@ function getURLParameters(page) {
     // make array of objects to search for
     var options = [];
     var runtime = null;
-    Object.keys(urlParams).forEach(function (key) {
+    Object.keys(urlParams).forEach(function(key) {
         // page
         if (urlParams[key].name === 'page') {
             page = urlParams[key].searchFor;
@@ -516,28 +515,35 @@ function quickSearch(option, pg) {
     if (option[0].name === 'favorite movie') {
         var queryURL = 'https://api.themoviedb.org/3/search/movie?api_key=' + api_key + '&query=' + option[0].searchFor + '&sort_by=popularity.desc';
         getMovies(queryURL);
-    } else if (option[0].name === 'favorite genre') {
+    }
+    // search for genres
+    else if (option[0].name === 'favorite genre') {
         var queryURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + api_key + '&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=' + pg + '&with_genres=' + option[0].searchFor;
         getMovies(queryURL);
-    } else if (option[0].name === 'language') {
+    }
+    // search for languages
+    else if (option[0].name === 'language') {
         var queryURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + api_key + '&sort_by=popularity.desc&include_adult=false&include_video=false&page=' + pg + '&language=' + option[0].searchFor;
         getMovies(queryURL);
-    } else if (option[0].name === 'rating') {
+    }
+    // search for ratings
+    else if (option[0].name === 'rating') {
         var queryURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + api_key + '&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=' + pg + '&certification_country=US&certification.lte=' + option[0].searchFor;
+        console.log('rating query: ' + queryURL);
         getMovies(queryURL);
     }
-        else if (option[0].name === 'year') {
+    // search for release year
+    else if (option[0].name === 'year') {
         var queryURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + api_key + '&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=' + pg + '&primary_release_year=' + option[0].searchFor;
         getMovies(queryURL);
     }
-
     // search for people - actors/actresses
     else {
         var queryURL = 'https://api.themoviedb.org/3/search/person?api_key=' + api_key + '&language=en-US&page=' + pg + '&query=' + option[0].searchFor;
         $.ajax({
             url: queryURL,
             method: "GET"
-        }).then(function (response) {
+        }).then(function(response) {
             console.log(response);
             var person_id = response.results[0].id;
             var newQueryUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=' + api_key + '&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=' + pg + '&with_people=' + person_id;
@@ -563,7 +569,7 @@ function advancedSearch(options, runtime, pg) {
             $.ajax({
                 url: query,
                 method: "GET"
-            }).then(function (response) {
+            }).then(function(response) {
                 console.log(response);
                 // if results?
                 if (response.results[0]) {
@@ -611,7 +617,7 @@ function advancedSearch(options, runtime, pg) {
             // build new url
             var finalURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + api_key + '&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false';
             var movieID = '';
-            Object.keys(finalParams).forEach(function (param) {
+            Object.keys(finalParams).forEach(function(param) {
                 if (finalParams[param].genre_ids) {
                     movieID = finalParams[param].id;
                     finalURL = finalURL + finalParams[param].prop + encodeURI(finalParams[param].genre_ids);
@@ -629,7 +635,7 @@ function advancedSearch(options, runtime, pg) {
             $.ajax({
                 url: finalURL,
                 method: "GET"
-            }).then(function (response) {
+            }).then(function(response) {
                 console.log(response);
                 totalResults = response.total_results;
                 var totalPages = response.total_pages;
@@ -700,17 +706,17 @@ function addLoaderOverlay() {
  */
 function imagesLoaded() {
     $('#movies').waitForImages({
-        finished: function () {
+        finished: function() {
             // ...
             console.log('All images have loaded');
         },
-        each: function () {
+        each: function() {
             // ...
             console.log('image loaded');
         },
         waitForAll: true
     });
-    $('#movies').waitForImages(true).done(function () {
+    $('#movies').waitForImages(true).done(function() {
         // ...
         console.log('removing loader');
         removeLoader();
@@ -726,15 +732,15 @@ function removeLoader() {
 }
 
 // general search button
-$('#generalSearchBtn').on('click', function () {
+$('#generalSearchBtn').on('click', function() {
     event.preventDefault();
     var search = $('#generalSearchInput').val().trim();
-    var redirectURL = 'search.html?fMovie=' + search;
+    var redirectURL = 'search.html?fMovie=' + encodeURI(search);
     window.location.href = redirectURL;
 });
 
 // year search
-$('#yearSearchBtn').on('click', function () {
+$('#yearSearchBtn').on('click', function() {
     event.preventDefault();
     var search = $('#yearInput').val().trim();
     var redirectURL = 'search.html?year=' + search;
@@ -742,36 +748,27 @@ $('#yearSearchBtn').on('click', function () {
 });
 
 // genre button search
-$(document).on('click', '.btn-genre', function () {
+$(document).on('click', '.btn-genre', function() {
     var genre_id = $(this).attr('data-id');
     var redirectURL = 'search.html?fGenre=' + genre_id;
     window.location.href = redirectURL;
 });
 
-//language btn search
-$(document).on('click', '.btn-language', function () {
+// language btn search
+$(document).on('click', '.btn-language', function() {
     var language_id = $(this).attr('data-id');
-    var redirectURL = 'search.html?language=' + language_id;
+    var redirectURL = 'search.html?language=' + encodeURI(language_id);
     window.location.href = redirectURL;
 });
 // ratings
-$(document).on('click', '.btn-rating', function () {
+$(document).on('click', '.btn-rating', function() {
     var rating = $(this).attr('data-id');
-    var redirectURL = 'search.html?rating=' + rating;
+    var redirectURL = 'search.html?rating=' + encodeURI(rating);
     window.location.href = redirectURL;
 });
 
-// quick search
-// $('#generalSearchBtn').on('click', function() {
-//     event.preventDefault();
-//     var q = encodeURI($('#generalSearch').val().trim());
-//     var o = $('#searchFor').val();
-//     var redirectURL = 'search.html?' + o + '=' + q;
-//     window.location.href = redirectURL;
-// });
-
 // advanced search form
-$('#advancedSearchBtn').on('click', function () {
+$('#advancedSearchBtn').on('click', function() {
     event.preventDefault();
     var favoriteActor = $('#favoriteActor').val().trim();
     var favoriteMovie = $('#favoriteMovie').val().trim();
@@ -835,8 +832,9 @@ $().fancybox({
 // generalSearch();
 genreButtons();
 languageBtns();
+ratingBtns();
 
-$(document).ready(function () {
+$(document).ready(function() {
     if (window.location.href.indexOf('?') > -1) {
         getURLParameters('1');
     } else {
