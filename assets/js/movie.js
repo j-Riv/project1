@@ -412,7 +412,7 @@ function movieDetails(id) {
 function getURLParameters(page) {
     console.log('getting url params');
     // clear
-    // $('#movies').empty();
+    $('#movies').empty();
     var pageURL = window.location.search.substring(1);
     var urlParams = [];
     var search = pageURL.slice(pageURL.indexOf('?') + 1);
@@ -742,9 +742,15 @@ $('#generalSearchBtn').on('click', function() {
 // year search
 $('#yearSearchBtn').on('click', function() {
     event.preventDefault();
+    var feedback = $('#yearFeedback');
     var search = $('#yearInput').val().trim();
-    var redirectURL = 'search.html?year=' + search;
-    window.location.href = redirectURL;
+    // make sure its a valid year (4 digits)
+    if (/^\d{4}$/.test(search) && search > 1900) {
+        var redirectURL = 'search.html?year=' + search;
+        window.location.href = redirectURL;
+    } else {
+        feedback.html('<span class="text-danger">Please enter a valid 4 digit year greater than 1900.</span>');
+    }
 });
 
 // genre button search

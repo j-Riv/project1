@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Profile | Pick-A-Flick</title>
+    <link rel="shortcut icon" href="./assets/images/favicon.ico" />
     <!-- firebase -->
     <!-- Firebase App is always required and must be first -->
     <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-app.js"></script>
@@ -126,7 +127,7 @@
             <!-- Search Title -->
             <h5 class="sb-searchtitle">Search by keyword, movie, or person</h5>
             <form class="form-inline">
-                <input class="form-control mr-sm-2 sbsearchinput" type="search" placeholder="Enter keyword, movie, or person" aria-label="Search" id="generalSearchInput">
+                <input class="form-control mr-sm-2 sbsearchinput" type="search" placeholder="Enter keyword, movie, or person" aria-label="Search" id="generalSearchInput" required>
                 <button class="btn btn-dark my-2 my-sm-0 sbsearchbtn" type="submit" id="generalSearchBtn"><i class="fas fa-search"></i></button>
             </form>
             <!-- Quick Search Title -->
@@ -184,13 +185,13 @@
                     </div>
                     <div id="collapseYearSearch" class="collapse" aria-labelledby="yearSearch" data-parent="#yearQuickSearch">
                         <form class="form-inline">
-                            <input class="form-control mr-sm-2 sbsearchinput" type="search" placeholder="Enter a Year" aria-label="Search" id="yearInput">
-                            <button class="btn btn-dark my-2 my-sm-0 sbsearchbtn" type="submit" id="yearSearchBtn"><i
-                                    class="fas fa-search"></i></button>
+                            <input class="form-control mr-sm-2 sbsearchinput" type="search" placeholder="Enter a Year" aria-label="Search" id="yearInput" maxlength="4" pattern="\d{4}" required>
+                            <button class="btn btn-dark my-2 my-sm-0 sbsearchbtn" type="submit" id="yearSearchBtn"><i class="fas fa-search"></i></button>
+                            <div id="yearFeedback">
+                            </div>
                         </form>
                     </div>
                 </div>
-
             </div>
             <!-- /T -->
             <!-- m -->
@@ -388,7 +389,7 @@
         $(document).ready(function() {
             setTimeout(function() {
                 $('#loaderOverlay').remove();
-            }, 1000);
+            }, 50000);
         });
     </script>
 </body>

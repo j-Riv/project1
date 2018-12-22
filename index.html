@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pick-A-Flick | Sign In or Sign Up</title>
+    <title>Pick-A-Flick</title>
+    <link rel="shortcut icon" href="./assets/images/favicon.ico" />
     <!-- firebase -->
     <!-- Firebase App is always required and must be first -->
     <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-app.js"></script>
@@ -99,12 +100,13 @@
                     </div>
                     <div id="collapseYearSearch" class="collapse" aria-labelledby="yearSearch" data-parent="#yearQuickSearch">
                         <form class="form-inline">
-                            <input class="form-control mr-sm-2 sbsearchinput" type="search" placeholder="Enter a Year" aria-label="Search" id="yearInput">
+                            <input class="form-control mr-sm-2 sbsearchinput" type="search" placeholder="Enter a Year" aria-label="Search" id="yearInput" maxlength="4" pattern="\d{4}" required>
                             <button class="btn btn-dark my-2 my-sm-0 sbsearchbtn" type="submit" id="yearSearchBtn"><i class="fas fa-search"></i></button>
+                            <div id="yearFeedback">
+                            </div>
                         </form>
                     </div>
                 </div>
-
             </div>
             <!-- /T -->
             <!-- m -->
