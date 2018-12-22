@@ -428,7 +428,6 @@ function getURLParameters(page) {
     }
     // make array of objects to search for
     var options = [];
-    var runtime = null;
     Object.keys(urlParams).forEach(function(key) {
         // page
         if (urlParams[key].name === 'page') {
@@ -442,10 +441,6 @@ function getURLParameters(page) {
                 endPoint: 'search/person'
             };
             options.push(favoriteActorObj);
-        }
-        // runtime
-        if (urlParams[key].name === 'rTime') {
-            runtime = urlParams[key].searchFor
         }
         if (urlParams[key].name === 'fMovie') {
             var favoriteMovieObj = {
@@ -496,7 +491,7 @@ function getURLParameters(page) {
     var numOfOptions = options.length;
     if (numOfOptions > 1) {
         console.log('running advanced search');
-        advancedSearch(options, runtime, page);
+        advancedSearch(options, page);
     }
     // quick search
     else {
@@ -513,7 +508,7 @@ function getURLParameters(page) {
 function quickSearch(option, pg) {
     // search for movie titles
     if (option[0].name === 'favorite movie') {
-        var queryURL = 'https://api.themoviedb.org/3/search/movie?api_key=' + api_key + '&query=' + option[0].searchFor + '&sort_by=popularity.desc';
+        var queryURL = 'https://api.themoviedb.org/3/search/movie?api_key=' + api_key + '&page=' + pg + '&query=' + option[0].searchFor + ' & sort_by = popularity.desc ';
         getMovies(queryURL);
     }
     // search for genres
@@ -555,10 +550,9 @@ function quickSearch(option, pg) {
 /**
  * gets movies based on multiple options
  * @param {array} options - array of option objects 
- * @param {string} runtime - movies runtime
  * @param {string} pg - page number
  */
-function advancedSearch(options, runtime, pg) {
+function advancedSearch(options, pg) {
     var finalURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + api_key + '&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=' + pg;
     // get ids for parameters that need to be passed by id
     var finalParams = [];
@@ -583,20 +577,17 @@ function advancedSearch(options, runtime, pg) {
                             prop: '&with_people='
                         }
                     }
-                    if (option.name === 'runtime') {
-                        var param = {
-                            id: foundID,
-                            prop: '&with_runtime.lte='
-                        }
-                    }
                     if (option.name === 'favorite movie') {
                         // get genre ids array
                         var genreIDs = response.results[0].genre_ids;
                         // save array to string
                         genreIDs = genreIDs.toString();
+                        // split genreIDS only use first
+                        genreIDs = genreIDs.split(',');
                         var param = {
                             id: foundID,
-                            genre_ids: genreIDs,
+                            // genre_ids: genreIDs,
+                            genre_ids: genreIDs[0],
                             prop: '&with_genres='
                         }
                     }
@@ -621,12 +612,12 @@ function advancedSearch(options, runtime, pg) {
                 if (finalParams[param].genre_ids) {
                     movieID = finalParams[param].id;
                     finalURL = finalURL + finalParams[param].prop + encodeURI(finalParams[param].genre_ids);
-                } else if (runtime !== null) {
-                    finalURL = finalURL + '&with_runtime.lte=' + runtime;
                 } else {
                     finalURL = finalURL + finalParams[param].prop + encodeURI(finalParams[param].id);
                 }
             });
+            // add page number
+            finalURL = finalURL + '&page=' + pg;
             console.log('The final url: ' + finalURL);
             // get and display movie recommendations without displaying the users favorite movie
             console.log('running get filtered movies');
@@ -651,29 +642,40 @@ function advancedSearch(options, runtime, pg) {
                 imagesLoaded();
                 console.log('done running get filtered movies: ' + totalResults);
                 // if we end up needing more recommendations
-                if (parseInt(totalResults) < 8) {
-                    console.log('I think we need more movies. Lets get some.');
-                    // this might end up showing duplicates though
-                    // response.results.forEach(result => {
-                    //     var resID = result.id;
-                    //     var rec = 'https://api.themoviedb.org/3/movie/' + resID + '/recommendations?api_key=' + api_key + '&language=en-US&page=1';
-                    //     getMovies(rec);
-                    // });
-                    // instead we might just search recommendations of 1st from response list
-                    // first or random havent decided
-                    var ep = [
-                        'recommendations',
-                        'similar'
-                    ];
-                    // random id from results
-                    var randomID = response.results[Math.floor(Math.random() * response.results.length)].id;
-                    // random endpoint
-                    var randomEP = ep[Math.floor(Math.random() * ep.length)];
-                    console.log('We will use random id:(' + randomID + ')');
-                    // var recID = response.results[0].id;
-                    var rec = 'https://api.themoviedb.org/3/movie/' + randomID + '/' + randomEP + '?api_key=' + api_key + '&language=en-US&page=1';
-                    addLoaderOverlay();
-                    getMovies(rec);
+                if (parseInt(totalResults) > 0) {
+                    if (parseInt(totalResults) < 8) {
+                        console.log('I think we need more movies. Lets get some.');
+                        // this might end up showing duplicates though
+                        // response.results.forEach(result => {
+                        //     var resID = result.id;
+                        //     var rec = 'https://api.themoviedb.org/3/movie/' + resID + '/recommendations?api_key=' + api_key + '&language=en-US&page=1';
+                        //     getMovies(rec);
+                        // });
+                        // instead we might just search recommendations of 1st from response list
+                        // first or random havent decided
+                        var ep = [
+                            'recommendations',
+                            'similar'
+                        ];
+                        // random id from results
+                        var randomID = response.results[Math.floor(Math.random() * response.results.length)].id;
+                        // random endpoint
+                        var randomEP = ep[Math.floor(Math.random() * ep.length)];
+                        console.log('We will use random id:(' + randomID + ')');
+                        // var recID = response.results[0].id;
+                        var rec = 'https://api.themoviedb.org/3/movie/' + randomID + '/' + randomEP + '?api_key=' + api_key + '&language=en-US&page=1';
+                        addLoaderOverlay();
+                        getMovies(rec);
+                    }
+                }
+                // no results
+                else {
+                    var noResults = `
+                        <div class="col-sm-12">
+                            <p class="text-center text-light">No Results Found Please Search Again.</p>
+                        </div>
+                    `;
+                    $('#movies').html(noResults);
                 }
             });
         }
@@ -778,8 +780,6 @@ $('#advancedSearchBtn').on('click', function() {
     event.preventDefault();
     var favoriteActor = $('#favoriteActor').val().trim();
     var favoriteMovie = $('#favoriteMovie').val().trim();
-    var runtime = $('#runtime').val();
-
     var arr = [];
     if (favoriteActor) {
         var fActor = 'fActor=' + encodeURI(favoriteActor);
@@ -788,10 +788,6 @@ $('#advancedSearchBtn').on('click', function() {
     if (favoriteMovie) {
         var fMovie = 'fMovie=' + encodeURI(favoriteMovie);
         arr.push(fMovie);
-    }
-    if (runtime) {
-        var rTime = 'rTime=' + runtime;
-        arr.push(rTime);
     }
     var redirectURL = 'search.html?';
     for (var i = 0; i < arr.length; i++) {
