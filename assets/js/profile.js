@@ -18,8 +18,6 @@ var userUID = '';
  * gets user data if user is signed in
  */
 function profileInit() {
-    // add logout functionality
-    var btn = $('#login-logout');
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
@@ -145,36 +143,6 @@ function getMovies(user) {
     $('#profileCard').addClass('loaded');
 }
 
-
-// function movies() {
-//     // movies
-//     var favMovies = [
-//         '293452',
-//         '46096',
-//         '424319',
-//         '13020'
-//     ];
-//     favMovies.forEach(movie => {
-//         getMovie(movie, $('#favoritedMovies'));
-//     });
-//     var watchedMovies = [
-//         '428078',
-//         '507569',
-//         '383498',
-//         '507569'
-//     ];
-//     watchedMovies.forEach(movie => {
-//         getMovie(movie, $('#watchedMovies'));
-//     });
-//     // checks for loaded images
-//     $('#movies').waitForImages().done(function() {
-//         // All descendant images have loaded, now slide up.
-//         console.log('All images have loaded');
-//         removeLoader();
-//     });
-//     $('#profileCard').addClass('loaded');
-// }
-
 /**
  * gets movie and puts it in the selected container
  * @param {string} id - id of movie
@@ -253,9 +221,13 @@ function signOut() {
     });
 }
 
+/**
+ * changes the banner background image
+ * @param {string} poster - poster url 
+ */
 function changeBg(poster) {
     var banner = poster;
-    $("#bannerImage").css("background-image", "url(" + banner + ")");
+    $('#bannerImage').css('background-image', 'url(' + banner + ')');
 }
 
 // init
