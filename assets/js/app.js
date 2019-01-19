@@ -15,8 +15,7 @@ var origin = window.location.origin;
 console.log('origin: ' + origin);
 
 var uiConfig = {
-    'signInSuccessUrl': 'http://localhost/projects/project1/search.html',
-    // 'signInSuccessUrl': origin + '/search.html',
+    'signInSuccessUrl': origin + '/search.html',
     'signInOptions': [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
