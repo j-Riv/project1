@@ -4,6 +4,8 @@ A movie search web app created to showcase use of Firebase and TMDb Api's.
 
 **Link** [Pick-A-Flick](https://j-riv.github.io/project1)
 
+![Pick-A-Flick](/assets/images/screenshots/pick-a-flick-search-screenshot.jpg)
+
 ## Tecnologies Used:
 * Javascript
 * jQuery
