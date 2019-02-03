@@ -380,7 +380,7 @@ function movieDetails(id) {
         console.log('youtube: ' + youtube_key);
         // make a template for modal click on movie info
         var content = `
-            <div clas="container-fluid">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-6">
                         <img src="${poster}" />
